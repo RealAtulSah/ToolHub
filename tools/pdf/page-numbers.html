@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>PDF Page Numbering Online | Add Numbers to PDF - ToolHub Pro</title>
+  <meta name="title" content="PDF Page Numbering Online | Add Numbers to PDF - ToolHub Pro">
+  <meta name="description" content="Add page numbers to your PDF document (headers or footers) with customized locations, fonts, and styles. 100% private.">
+  <link rel="canonical" href="https://toolhub.pro/tools/pdf/page-numbers.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>PDF Tools</span> &gt; <span>PDF Page Numbering</span>
+        </div>
+        <h1 class="section-title">PDF Page Numbering</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Insert page numbers into headers or footers across your PDF pages. Fast and secure.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+        <h3 class="upload-title">Drag & drop your PDF here</h3>
+        <p class="upload-subtitle">Supports PDF files (Max 50MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="application/pdf" style="display: none;">
+      </div>
+
+      <!-- Processing Workspace (Hidden Initially) -->
+      <div class="tool-workspace" id="workspace" style="display: none; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+        <!-- Left Column: Document Previews -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin: 0;">PDF Page Layout Preview</h3>
+          
+          <div id="pages-preview-grid" style="max-height: 450px; overflow-y: auto;">
+            <!-- Rendered thumbnails -->
+          </div>
+        </div>
+
+        <!-- Right Column: Control Options -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Number Settings</h3>
+
+          <!-- Details -->
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+            <div><strong>File Name:</strong> <span id="filename-label" style="color: var(--text-secondary);"></span></div>
+            <div><strong>Total Pages:</strong> <span id="pages-label" style="color: var(--text-secondary);"></span></div>
+          </div>
+
+          <!-- Numbering Style -->
+          <div>
+            <label for="num-style" style="display: block; margin-bottom: 8px; font-weight: 500;">Numbering Style</label>
+            <select id="num-style" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-md); color: var(--text-primary); cursor: pointer;">
+              <option value="simple">Simple (1, 2, 3...)</option>
+              <option value="page-x-y">Page X of Y</option>
+            </select>
+          </div>
+
+          <!-- Position -->
+          <div>
+            <label for="num-position" style="display: block; margin-bottom: 8px; font-weight: 500;">Position</label>
+            <select id="num-position" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-md); color: var(--text-primary); cursor: pointer;">
+              <option value="bottom-center">Bottom Center</option>
+              <option value="bottom-left">Bottom Left</option>
+              <option value="bottom-right">Bottom Right</option>
+              <option value="top-center">Top Center</option>
+              <option value="top-left">Top Left</option>
+              <option value="top-right">Top Right</option>
+            </select>
+          </div>
+
+          <!-- Font Size -->
+          <div>
+            <label for="num-size" style="display: block; margin-bottom: 8px; font-weight: 500;">Font Size</label>
+            <select id="num-size" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-md); color: var(--text-primary); cursor: pointer;">
+              <option value="10">10 pt</option>
+              <option value="12">12 pt</option>
+              <option value="14">14 pt</option>
+              <option value="16">16 pt</option>
+            </select>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+            <button class="btn btn-primary" id="add-numbers-btn">
+              Add Numbers & Download
+            </button>
+            <button class="btn btn-secondary" id="reset-btn">
+              Choose Another File
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="pdf-modifiers.js"></script>
+</body>
+</html>

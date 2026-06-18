@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Image Resizer | Resize Images Online - ToolHub Pro</title>
+  <meta name="title" content="Image Resizer | Resize Images Online - ToolHub Pro">
+  <meta name="description" content="Resize images to custom width and height in pixels or scale by percentage. Maintain aspect ratio and resize JPG, PNG, WEBP online.">
+  <link rel="canonical" href="https://toolhub.pro/tools/image/resizer.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Image Tools</span> &gt; <span>Image Resizer</span>
+        </div>
+        <h1 class="section-title">Image Resizer</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Modify image dimensions by pixels or percentage scale. Fast, private, browser-based execution.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"></div>
+        <h3 class="upload-title">Drag & drop your image here</h3>
+        <p class="upload-subtitle">Supports JPG, PNG, WEBP, SVG, GIF (Max 20MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+      </div>
+
+      <!-- Processing Workspace (Hidden Initially) -->
+      <div class="tool-workspace" id="workspace" style="display: none;">
+        <!-- Left Column: Previews -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Image Preview</h3>
+          
+          <!-- Live Preview Canvas Wrapper -->
+          <div style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; height: 350px; overflow: hidden;">
+            <img id="preview-image" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 4px; box-shadow: var(--shadow-sm);" alt="Resize preview">
+          </div>
+
+          <!-- Dimension Stats -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="background: var(--bg-tertiary); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Original Dimensions</div>
+              <div id="original-dim-label" style="font-size: 1.05rem; font-weight: 600; margin-top: 4px;">0 x 0 px</div>
+            </div>
+            <div style="background: var(--bg-tertiary); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Target Dimensions</div>
+              <div id="target-dim-label" style="font-size: 1.05rem; font-weight: 600; margin-top: 4px; color: var(--accent);">0 x 0 px</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Controls -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Resize Settings</h3>
+
+          <!-- Mode Toggle Tabs -->
+          <div style="display: flex; background: var(--bg-tertiary); padding: 4px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <button class="btn btn-secondary" id="tab-pixels" style="flex: 1; padding: 8px 12px; border: none; font-size: 0.9rem; background: var(--bg-secondary); border-radius: var(--radius-sm);">By Pixels</button>
+            <button class="btn btn-secondary" id="tab-percent" style="flex: 1; padding: 8px 12px; border: none; font-size: 0.9rem; background: transparent; border-radius: var(--radius-sm);">By Percent</button>
+          </div>
+
+          <!-- Pixel inputs panel -->
+          <div id="panel-pixels" style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <label for="width-input" style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-secondary);">Width (px)</label>
+                <input type="number" id="width-input" min="1" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); color: var(--text-primary);">
+              </div>
+              <div>
+                <label for="height-input" style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-secondary);">Height (px)</label>
+                <input type="number" id="height-input" min="1" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); color: var(--text-primary);">
+              </div>
+            </div>
+            
+            <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; user-select: none;">
+              <input type="checkbox" id="lock-aspect-ratio" checked style="accent-color: var(--accent); width: 16px; height: 16px;">
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Lock Aspect Ratio</span>
+            </label>
+          </div>
+
+          <!-- Percentage inputs panel (Hidden by default) -->
+          <div id="panel-percent" style="display: none; flex-direction: column; gap: 16px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500;">
+                <label for="percent-input">Scale Percentage</label>
+                <span id="percent-value">100%</span>
+              </div>
+              <input type="range" id="percent-input" min="10" max="200" value="100" style="width: 100%; accent-color: var(--accent);">
+            </div>
+          </div>
+
+          <!-- Output format selector -->
+          <div>
+            <label for="format-select" style="display: block; margin-bottom: 8px; font-weight: 500;">Output Format</label>
+            <select id="format-select" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-md); color: var(--text-primary); cursor: pointer;">
+              <option value="original">Original Format</option>
+              <option value="image/jpeg">JPEG (Lossy, Smaller size)</option>
+              <option value="image/png">PNG (Lossless, High quality)</option>
+              <option value="image/webp">WEBP (Modern, Highly optimized)</option>
+            </select>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+            <button class="btn btn-primary" id="download-btn">
+              Download Resized Image
+            </button>
+            <button class="btn btn-secondary" id="reset-btn">
+              Resize Another Image
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="resizer.js"></script>
+</body>
+</html>

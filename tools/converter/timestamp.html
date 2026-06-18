@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Unix Timestamp Converter Online | Unix Epoch - ToolHub Pro</title>
+  <meta name="title" content="Unix Timestamp Converter Online | Unix Epoch - ToolHub Pro">
+  <meta name="description" content="Convert Unix Epoch timestamps (seconds or milliseconds) to readable ISO, local, or UTC dates and vice versa online. Safe and client-side.">
+  <link rel="canonical" href="https://toolhub.pro/tools/converter/timestamp.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Converters</span> &gt; <span>Unix Timestamp</span>
+        </div>
+        <h1 class="section-title">Unix Timestamp Converter</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Translate Epoch timestamps to human-readable datetime formats and vice versa. Fully secure.</p>
+      </div>
+
+      <!-- Live Epoch Widget -->
+      <div class="glass-panel" style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 24px;
+        margin-bottom: 24px;
+      ">
+        <div>
+          <h3 style="font-size: 1.1rem; margin: 0; font-family: var(--font-heading);">Current Unix Time:</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 4px 0 0 0;">Seconds elapsed since Jan 1, 1970 UTC</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <span id="epoch-live-clock" style="
+            font-family: monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            letter-spacing: 1px;
+          ">1718733221</span>
+          <button class="btn btn-secondary btn-sm" id="use-current-btn">Use Current</button>
+        </div>
+      </div>
+
+      <!-- Processing Workspace -->
+      <div class="tool-workspace" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- Left Column: Bidirectional Inputs -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <!-- Tab 1: Unix to Date -->
+          <div style="display: flex; flex-direction: column; gap: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 20px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 600; margin: 0;">Unix Epoch to Date</h3>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <input type="text" id="stamp-input" value="1718733221" style="
+                flex: 1;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: monospace;
+              " placeholder="Epoch timestamp (sec/ms)...">
+              <button class="btn btn-primary" id="stamp-to-date-btn">Convert &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Tab 2: Date to Unix -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 600; margin: 0;">Date String to Unix Epoch</h3>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <input type="text" id="date-input-str" value="2026-06-19 00:00:00" style="
+                flex: 1;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: monospace;
+              " placeholder="e.g. YYYY-MM-DD HH:MM:SS or ISO string...">
+              <button class="btn btn-primary" id="date-to-stamp-btn">Convert &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Outputs -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Conversion Output</h3>
+          <textarea id="stamp-output" readonly style="
+            width: 100%;
+            height: 200px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            padding: 16px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: none;
+          " placeholder="Converted dates or timestamps..."></textarea>
+          
+          <div style="display: flex; gap: 12px; margin-top: auto;">
+            <button class="btn btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('stamp-output').value).then(() => window.showToast('Copied output results!', 'success'))" style="flex: 1;">Copy Results</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="system-converters.js"></script>
+</body>
+</html>

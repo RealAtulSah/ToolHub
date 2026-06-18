@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Remove Image Metadata | Clean EXIF Online - ToolHub Pro</title>
+  <meta name="title" content="Remove Image Metadata | Clean EXIF Online - ToolHub Pro">
+  <meta name="description" content="Strip EXIF tags, GPS camera locations, and private metadata from your photos online. 100% private client-side metadata eraser.">
+  <link rel="canonical" href="https://toolhub.pro/tools/image/remove-metadata.html">
+
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+  <script>window.toolId = 'remove-metadata';</script>
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <header class="global-header" id="global-header"></header>
+
+    <main class="main-content">
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Image Tools</span> &gt; <span>Remove Metadata</span>
+        </div>
+        <h1 class="section-title">Remove Image Metadata</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Strip hidden EXIF, camera, and GPS metadata from photos to protect your privacy online.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"></div>
+        <h3 class="upload-title">Drag & drop your photo here</h3>
+        <p class="upload-subtitle">Supports JPG, PNG, WEBP (Max 20MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+      </div>
+
+      <!-- Workspace -->
+      <div class="tool-workspace" id="workspace" style="display: none;">
+        <!-- Left: Image Preview -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Cleaned Image Preview</h3>
+          <div style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; height: 320px; overflow: hidden;">
+            <img id="preview-image" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 4px;" alt="Cleaned output preview">
+          </div>
+        </div>
+
+        <!-- Right: Status and Downloads -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; justify-content: center;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Stripping Status</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px; background: var(--bg-tertiary); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem;">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-secondary);">Original File Size:</span>
+              <span id="orig-size" style="font-weight: 600;">0 KB</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 4px;">
+              <span style="color: var(--text-secondary);">Cleaned File Size:</span>
+              <span id="cleared-size" style="font-weight: 600; color: var(--success);">0 KB</span>
+            </div>
+          </div>
+
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; text-align: center;">✅ All camera tags, apertures, GPS coordinates, and capture dates have been discarded.</p>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+            <button class="btn btn-primary" id="download-btn">Download Cleaned Image</button>
+            <button class="btn btn-secondary" id="reset-btn">Clean Another Image</button>
+          </div>
+        </div>
+      </div>
+
+      <footer id="global-footer"></footer>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="extractors.js"></script>
+</body>
+</html>

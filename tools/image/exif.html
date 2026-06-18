@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EXIF Data Viewer | Read Image Metadata Tags - ToolHub Pro</title>
+  <meta name="title" content="EXIF Data Viewer | Read Image Metadata Tags - ToolHub Pro">
+  <meta name="description" content="View photo metadata tags, camera settings, shutter speeds, GPS locations, and lens info online. Completely secure, private extraction.">
+  <link rel="canonical" href="https://toolhub.pro/tools/image/exif.html">
+
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+  <script>window.toolId = 'exif';</script>
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <header class="global-header" id="global-header"></header>
+
+    <main class="main-content">
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Image Tools</span> &gt; <span>EXIF Data Viewer</span>
+        </div>
+        <h1 class="section-title">EXIF Data Viewer</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">View binary metadata, aperture specs, GPS locations, and camera logs from your pictures.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon">ℹ️</div>
+        <h3 class="upload-title">Drag & drop your photo here</h3>
+        <p class="upload-subtitle">Supports JPG, TIFF (Max 20MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+      </div>
+
+      <!-- Workspace -->
+      <div class="tool-workspace" id="workspace" style="display: none;">
+        <!-- Left: Image Preview -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Photo Preview</h3>
+          <div style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; height: 320px; overflow: hidden;">
+            <img id="preview-image" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 4px;" alt="Source preview">
+          </div>
+        </div>
+
+        <!-- Right: EXIF Tags Table -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; max-height: 440px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Metadata Tags List</h3>
+          
+          <div style="flex-grow: 1; overflow-y: auto; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+              <thead>
+                <tr style="background: var(--bg-primary); border-bottom: 2px solid var(--border-color);">
+                  <th style="padding: 10px; font-weight: 600;">Tag Name</th>
+                  <th style="padding: 10px; font-weight: 600;">Tag Value</th>
+                </tr>
+              </thead>
+              <tbody id="exif-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+            <button class="btn btn-secondary" id="reset-btn">Read Another Photo</button>
+          </div>
+        </div>
+      </div>
+
+      <footer id="global-footer"></footer>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="extractors.js"></script>
+</body>
+</html>

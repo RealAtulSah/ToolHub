@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Time Zone Converter Online | World Clock - ToolHub Pro</title>
+  <meta name="title" content="Time Zone Converter Online | World Clock - ToolHub Pro">
+  <meta name="description" content="Compare and convert times between different global locations and time zones. Interactive meeting planner slider included.">
+  <link rel="canonical" href="https://toolhub.pro/tools/timezone.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../index.html">Home</a> &gt; <span>Converters</span> &gt; <span>Time Zone Converter</span>
+        </div>
+        <h1 class="section-title">Time Zone Converter</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Plan meetings and translate times between global locations. Use the slider to scrub through standard hours.</p>
+      </div>
+
+      <!-- Processing Workspace -->
+      <div class="tool-workspace" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- Left Column: Source Zone & Settings -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Source Time Details</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; gap: 12px;">
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                <label style="font-size: 0.9rem; color: var(--text-secondary);">Date:</label>
+                <input type="date" id="tz-date" style="
+                  background: var(--bg-tertiary);
+                  border: 1px solid var(--border-color);
+                  border-radius: var(--radius-md);
+                  color: var(--text-primary);
+                  padding: 10px 14px;
+                ">
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                <label style="font-size: 0.9rem; color: var(--text-secondary);">Time:</label>
+                <input type="time" id="tz-time" style="
+                  background: var(--bg-tertiary);
+                  border: 1px solid var(--border-color);
+                  border-radius: var(--radius-md);
+                  color: var(--text-primary);
+                  padding: 10px 14px;
+                  font-family: monospace;
+                ">
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">From Time Zone:</label>
+              <select id="tz-from" style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+              "></select>
+            </div>
+
+            <!-- Hour Scrubbing Slider (Meeting Planner feature) -->
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label style="font-size: 0.9rem; color: var(--text-secondary);">Quick Hour Scrub / Planner:</label>
+                <span id="tz-slider-label" style="font-family: monospace; font-weight: 600; color: var(--accent-primary);">12:00</span>
+              </div>
+              <input type="range" id="tz-hour-slider" min="0" max="23" value="12" style="
+                width: 100%;
+                cursor: pointer;
+                accent-color: var(--accent-primary);
+              ">
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Target Zone & Output -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Target Time Details</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">To Time Zone:</label>
+              <select id="tz-to" style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+              "></select>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">Converted Result Time:</label>
+              <textarea id="tz-output" readonly style="
+                width: 100%;
+                height: 120px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 16px;
+                font-family: monospace;
+                font-size: 0.95rem;
+                resize: none;
+              " placeholder="Converted time result..."></textarea>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: auto;">
+            <button class="btn btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('tz-output').value).then(() => window.showToast('Copied converted time!', 'success'))" style="flex: 1;">Copy Date & Time</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../assets/js/app.js"></script>
+  <script type="module" src="converter/system-converters.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Base64 to Image Decoder | Restore Base64 Strings - ToolHub Pro</title>
+  <meta name="title" content="Base64 to Image Decoder | Restore Base64 Strings - ToolHub Pro">
+  <meta name="description" content="Decode Base64 Data URI strings back into viewable and downloadable images instantly online. Private, local browser-based decoding.">
+  <link rel="canonical" href="https://toolhub.pro/tools/image/base64-to-image.html">
+
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+  <script>window.toolId = 'base64-to-image';</script>
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <header class="global-header" id="global-header"></header>
+
+    <main class="main-content">
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Image Tools</span> &gt; <span>Base64 to Image</span>
+        </div>
+        <h1 class="section-title">Base64 to Image Decoder</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Paste a Base64 string below to decode and convert it back to a downloadable image file.</p>
+      </div>
+
+      <!-- Paste Box Zone (Instead of file drop since it's text input) -->
+      <div class="upload-container glass-panel" id="upload-zone" style="cursor: default; padding: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          <h3 class="upload-title" style="text-align: left;">Paste Base64 Data URI String</h3>
+          <textarea id="base64-input" rows="8" placeholder="Paste data:image/png;base64,... here" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-sm); color: var(--text-primary); font-family: monospace; font-size: 0.8rem; resize: none; outline: none;"></textarea>
+          <button class="btn btn-primary" id="decode-btn" style="align-self: flex-start;">Decode Base64</button>
+        </div>
+      </div>
+
+      <!-- Workspace -->
+      <div class="tool-workspace" id="workspace" style="display: none; grid-template-columns: 1fr;">
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+          <h3 style="align-self: flex-start; font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Decoded Image Preview</h3>
+          
+          <div style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; min-height: 300px; max-height: 450px; overflow: hidden; max-width: 100%;">
+            <img id="preview-image" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 4px;" alt="Decoded output">
+          </div>
+
+          <div style="display: flex; gap: 12px; width: 100%; max-width: 450px; justify-content: center; margin-top: 10px;">
+            <button class="btn btn-primary" id="download-btn" style="flex: 1;">Download Decoded Image</button>
+            <button class="btn btn-secondary" id="reset-btn" style="flex: 1;">Decode Another String</button>
+          </div>
+        </div>
+      </div>
+
+      <footer id="global-footer"></footer>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="converters.js"></script>
+</body>
+</html>

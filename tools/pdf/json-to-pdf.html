@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Convert JSON to PDF Online | JSON to PDF - ToolHub Pro</title>
+  <meta name="title" content="Convert JSON to PDF Online | JSON to PDF - ToolHub Pro">
+  <meta name="description" content="Visualize nested JSON objects and compile them into styled PDF reports. 100% private in-browser tool.">
+  <link rel="canonical" href="https://toolhub.pro/tools/pdf/json-to-pdf.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>PDF Tools</span> &gt; <span>JSON to PDF</span>
+        </div>
+        <h1 class="section-title">JSON to PDF Converter</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Render raw JSON objects and arrays into structured, readable PDF files. Completely local.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone" style="margin-bottom: 24px;">
+        <div class="upload-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+        <h3 class="upload-title">Drag & drop your JSON file here (Optional)</h3>
+        <p class="upload-subtitle">Supports raw JSON files (Max 10MB) or write in the editor below</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept=".json" style="display: none;">
+      </div>
+
+      <!-- Processing Workspace (Shown Directly) -->
+      <div class="tool-workspace" id="workspace" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+        <!-- Left Column: JSON Code Area -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin: 0;">JSON Source Data</h3>
+          
+          <textarea id="json-input" style="
+            width: 100%;
+            height: 380px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            padding: 16px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: none;
+          " placeholder='{&#10;  "title": "Sales Report",&#10;  "date": "2026-06-19",&#10;  "items": [&#10;    { "id": 1, "name": "Item A", "amount": 120 },&#10;    { "id": 2, "name": "Item B", "amount": 80 }&#10;  ]&#10;}'></textarea>
+        </div>
+
+        <!-- Right Column: Control Options -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Layout Compilation</h3>
+
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            Ensure the JSON syntax is correct. Click Compile to render the nested structure into a styled PDF output document.
+          </p>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+            <button class="btn btn-primary" id="json-to-pdf-btn">
+              Compile & Save PDF
+            </button>
+            <button class="btn btn-secondary" onclick="document.getElementById('json-input').value = ''">
+              Clear Editor
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="pdf-converters.js"></script>
+</body>
+</html>

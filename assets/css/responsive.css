@@ -1,0 +1,120 @@
+/* --- RESPONSIVE STYLE ADJUSTMENTS --- */
+
+@media (max-width: 1200px) {
+  :root {
+    --sidebar-width: 240px;
+  }
+  
+  .main-content {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 992px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-areas: 
+      "header"
+      "main";
+  }
+
+  aside.global-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: var(--sidebar-width);
+    height: 100vh;
+    transition: var(--transition);
+    z-index: 200;
+  }
+
+  aside.global-sidebar.active {
+    left: 0;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Hamburger Menu Button (hidden on desktop) */
+  .menu-toggle-btn {
+    display: flex !important;
+  }
+
+  .header-search {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 20px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  header.global-header {
+    padding: 0 20px;
+  }
+
+  .header-search {
+    display: none; /* Hide top search bar on smaller screens in favor of hero search or dedicated page search */
+  }
+
+  .tool-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .upload-container {
+    padding: 40px 20px;
+  }
+}
+
+/* Sidebar Toggle Backing Overlay for Mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 199;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* Custom Hamburger Icon styling */
+.menu-toggle-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

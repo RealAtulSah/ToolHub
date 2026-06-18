@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>PDF Form Filler Online | Fill PDF Forms - ToolHub Pro</title>
+  <meta name="title" content="PDF Form Filler Online | Fill PDF Forms - ToolHub Pro">
+  <meta name="description" content="Fill interactive fields, text boxes, checkboxes, and radio buttons in PDF forms. 100% private in-browser filler.">
+  <link rel="canonical" href="https://toolhub.pro/tools/pdf/form-filler.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>PDF Tools</span> &gt; <span>PDF Form Filler</span>
+        </div>
+        <h1 class="section-title">PDF Form Filler</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Locate and populate interactive text boxes, dropdowns, and checkboxes inside form PDFs.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+        <h3 class="upload-title">Drag & drop your Form PDF here</h3>
+        <p class="upload-subtitle">Supports PDF files with interactive forms (Max 50MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="application/pdf" style="display: none;">
+      </div>
+
+      <!-- Processing Workspace (Hidden Initially) -->
+      <div class="tool-workspace" id="workspace" style="display: none; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+        <!-- Left Column: Document Previews -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin: 0;">PDF Page Previews</h3>
+          
+          <div id="pages-preview-grid" style="max-height: 450px; overflow-y: auto;">
+            <!-- Rendered thumbnails -->
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Controls (Generated dynamically) -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin: 0;">Form Fields</h3>
+
+          <!-- Details -->
+          <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+            <div><strong>File:</strong> <span id="filename-label" style="color: var(--text-secondary);"></span></div>
+            <div><strong>Size:</strong> <span id="size-label" style="color: var(--text-secondary);"></span></div>
+          </div>
+
+          <!-- Fields Container -->
+          <div id="form-fields-container" style="display: flex; flex-direction: column; gap: 16px; max-height: 250px; overflow-y: auto; padding-right: 4px;">
+            <!-- Rendered form widgets -->
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 15px; border-top: 1px solid var(--border-color);">
+            <button class="btn btn-primary" id="save-form-btn">
+              Save Filled PDF
+            </button>
+            <button class="btn btn-secondary" id="reset-btn">
+              Choose Another File
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="pdf-security.js"></script>
+</body>
+</html>

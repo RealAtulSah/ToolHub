@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Scan to PDF Online | Camera Document Scanner - ToolHub Pro</title>
+  <meta name="title" content="Scan to PDF Online | Camera Document Scanner - ToolHub Pro">
+  <meta name="description" content="Use your webcam or mobile camera to snap document pages and compile them into a PDF. 100% private.">
+  <link rel="canonical" href="https://toolhub.pro/tools/pdf/scan.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>PDF Tools</span> &gt; <span>Scan to PDF</span>
+        </div>
+        <h1 class="section-title">Scan to PDF</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Use your device webcam to capture documents and assemble them into a clean compiled PDF. Local processing.</p>
+      </div>
+
+      <!-- Processing Workspace (Shown Directly) -->
+      <div class="tool-workspace" id="workspace" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+        <!-- Left Column: Camera Viewport -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; width: 100%; min-height: 350px; background: #000; border-radius: var(--radius-md); overflow: hidden; position: relative;">
+          <video id="scanner-video" autoplay playsinline style="width: 100%; height: 100%; max-height: 400px; object-fit: contain; transform: scaleX(1);"></video>
+          
+          <button class="btn btn-primary" id="snap-btn" style="position: absolute; bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); font-weight: bold; border-radius: 50%; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; padding: 0;"></button>
+        </div>
+
+        <!-- Right Column: Captured List -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin: 0;">Captured Pages</h3>
+
+          <p style="color: var(--text-secondary); font-size: 0.85rem;">
+            Snap pages of your document sequentially. Reorder or remove captures before compiling.
+          </p>
+
+          <!-- Captured thumbnails -->
+          <div id="scanned-thumbs-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 10px; max-height: 200px; overflow-y: auto;">
+            <!-- Snap list -->
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 15px; border-top: 1px solid var(--border-color);">
+            <button class="btn btn-primary" id="compile-scan-btn">
+              Compile & Save PDF
+            </button>
+            <button class="btn btn-secondary" id="reset-btn">
+              Clear All Snapshots
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="pdf-creative.js"></script>
+</body>
+</html>

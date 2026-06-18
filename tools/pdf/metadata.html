@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>PDF Metadata Editor Online | Edit PDF Tags - ToolHub Pro</title>
+  <meta name="title" content="PDF Metadata Editor Online | Edit PDF Tags - ToolHub Pro">
+  <meta name="description" content="Change PDF metadata tags like Title, Author, Subject, Keywords, and Creator details easily. 100% private.">
+  <link rel="canonical" href="https://toolhub.pro/tools/pdf/metadata.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>PDF Tools</span> &gt; <span>PDF Metadata Editor</span>
+        </div>
+        <h1 class="section-title">PDF Metadata Editor</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">View and edit document descriptors and tags entirely inside your browser.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+        <h3 class="upload-title">Drag & drop your PDF here</h3>
+        <p class="upload-subtitle">Supports PDF files (Max 50MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="application/pdf" style="display: none;">
+      </div>
+
+      <!-- Processing Workspace (Hidden Initially) -->
+      <div class="tool-workspace" id="workspace" style="display: none; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+        <!-- Left Column: Fields Editor -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin: 0;">Metadata Tags</h3>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div>
+              <label for="meta-title" style="display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 500;">Document Title</label>
+              <input type="text" id="meta-title" style="width: 100%; padding: 10px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary);">
+            </div>
+            <div>
+              <label for="meta-author" style="display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 500;">Author</label>
+              <input type="text" id="meta-author" style="width: 100%; padding: 10px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary);">
+            </div>
+            <div>
+              <label for="meta-subject" style="display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 500;">Subject</label>
+              <input type="text" id="meta-subject" style="width: 100%; padding: 10px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary);">
+            </div>
+            <div>
+              <label for="meta-keywords" style="display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 500;">Keywords</label>
+              <input type="text" id="meta-keywords" style="width: 100%; padding: 10px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary);">
+            </div>
+            <div>
+              <label for="meta-creator" style="display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 500;">Creator</label>
+              <input type="text" id="meta-creator" style="width: 100%; padding: 10px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary);">
+            </div>
+            <div>
+              <label for="meta-producer" style="display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 500;">Producer</label>
+              <input type="text" id="meta-producer" style="width: 100%; padding: 10px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary);">
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Control Options -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Metadata Operations</h3>
+
+          <!-- Details -->
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+            <div><strong>File Name:</strong> <span id="filename-label" style="color: var(--text-secondary);"></span></div>
+            <div><strong>Original Size:</strong> <span id="size-label" style="color: var(--text-secondary);"></span></div>
+            <div><strong>Total Pages:</strong> <span id="pages-label" style="color: var(--text-secondary);"></span></div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+            <button class="btn btn-primary" id="save-metadata-btn">
+              Save & Download PDF
+            </button>
+            <button class="btn btn-secondary" id="reset-btn">
+              Choose Another File
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="pdf-security.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Image Splitter | Slice Images into Grid Tiles Online - ToolHub Pro</title>
+  <meta name="title" content="Image Splitter | Slice Images into Grid Tiles Online - ToolHub Pro">
+  <meta name="description" content="Split and slice a single image into multiple grid blocks (e.g. for Instagram grid). Fast, client-side ZIP packaging.">
+  <link rel="canonical" href="https://toolhub.pro/tools/image/splitter.html">
+
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+  <script>window.toolId = 'splitter';</script>
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <header class="global-header" id="global-header"></header>
+
+    <main class="main-content">
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Image Tools</span> &gt; <span>Image Splitter</span>
+        </div>
+        <h1 class="section-title">Image Splitter</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Slice an image into grid components (rows and columns) and download them together in a ZIP file.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"></div>
+        <h3 class="upload-title">Drag & drop your image here</h3>
+        <p class="upload-subtitle">Supports JPG, PNG, WEBP (Max 20MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+      </div>
+
+      <!-- Workspace -->
+      <div class="tool-workspace" id="workspace" style="display: none;">
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Split Grid Preview</h3>
+          <div id="grid-preview"></div>
+        </div>
+
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Slicing Config</h3>
+          
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500;">
+              <label for="split-rows">Split Rows</label>
+              <span id="rows-val">2</span>
+            </div>
+            <input type="range" id="split-rows" min="1" max="10" value="2" style="width: 100%; accent-color: var(--accent);">
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500;">
+              <label for="split-cols">Split Columns</label>
+              <span id="cols-val">2</span>
+            </div>
+            <input type="range" id="split-cols" min="1" max="10" value="2" style="width: 100%; accent-color: var(--accent);">
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+            <button class="btn btn-primary" id="download-btn">Download Slices ZIP</button>
+            <button class="btn btn-secondary" id="reset-btn">Slice Another Image</button>
+          </div>
+        </div>
+      </div>
+
+      <footer id="global-footer"></footer>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="geometry.js"></script>
+</body>
+</html>

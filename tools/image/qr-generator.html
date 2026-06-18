@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>QR Code Generator | Create Custom QR Codes - ToolHub Pro</title>
+  <meta name="title" content="QR Code Generator | Create Custom QR Codes - ToolHub Pro">
+  <meta name="description" content="Generate high-quality custom QR codes for URLs, text, Wi-Fi networks, and contacts. Customize size, foreground, and background colors.">
+  <link rel="canonical" href="https://toolhub.pro/tools/image/qr-generator.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Image Tools</span> &gt; <span>QR Code Generator</span>
+        </div>
+        <h1 class="section-title">QR Code Generator</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Create personalized QR codes for text, URLs, Wi-Fi, and contacts with custom colors.</p>
+      </div>
+
+      <!-- Workspace Grid (Always visible for Generator) -->
+      <div class="tool-workspace">
+        
+        <!-- Left Column: Previews & Download -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; align-items: center; justify-content: center; width: 100%;">
+          <h3 style="align-self: flex-start; font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">QR Code Preview</h3>
+          
+          <!-- Generator canvas container -->
+          <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; display: flex; align-items: center; justify-content: center; width: 280px; height: 280px; overflow: hidden; box-shadow: var(--shadow-sm);" id="qrcode-container">
+            <div id="qrcode-render"></div>
+          </div>
+
+          <div style="width: 100%; display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+            <button class="btn btn-primary" id="download-btn">
+              Download QR Code (PNG)
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Settings -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Configure QR Code</h3>
+
+          <!-- Form type toggles -->
+          <div style="display: flex; background: var(--bg-tertiary); padding: 4px; border-radius: var(--radius-md); border: 1px solid var(--border-color); gap: 4px;">
+            <button class="btn btn-secondary" id="tab-text" style="flex: 1; padding: 8px; border: none; font-size: 0.85rem; background: var(--bg-secondary); border-radius: var(--radius-sm);">Text/URL</button>
+            <button class="btn btn-secondary" id="tab-wifi" style="flex: 1; padding: 8px; border: none; font-size: 0.85rem; background: transparent; border-radius: var(--radius-sm);">Wi-Fi</button>
+            <button class="btn btn-secondary" id="tab-vcard" style="flex: 1; padding: 8px; border: none; font-size: 0.85rem; background: transparent; border-radius: var(--radius-sm);">Contact</button>
+          </div>
+
+          <!-- Input Content Panels -->
+          <!-- Text/URL Panel -->
+          <div id="panel-text" style="display: flex; flex-direction: column; gap: 10px;">
+            <label for="text-input" style="font-weight: 500; font-size: 0.9rem;">Text or URL</label>
+            <textarea id="text-input" rows="4" placeholder="Enter link or text message..." style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-sm); color: var(--text-primary); resize: none;">https://toolhub.pro</textarea>
+          </div>
+
+          <!-- Wi-Fi Panel -->
+          <div id="panel-wifi" style="display: none; flex-direction: column; gap: 12px;">
+            <div>
+              <label for="wifi-ssid" style="display: block; margin-bottom: 6px; font-size: 0.85rem;">Network Name (SSID)</label>
+              <input type="text" id="wifi-ssid" placeholder="My Wi-Fi Network" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); color: var(--text-primary);">
+            </div>
+            <div>
+              <label for="wifi-password" style="display: block; margin-bottom: 6px; font-size: 0.85rem;">Password</label>
+              <input type="password" id="wifi-password" placeholder="WPA password" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); color: var(--text-primary);">
+            </div>
+            <div>
+              <label for="wifi-encryption" style="display: block; margin-bottom: 6px; font-size: 0.85rem;">Security Encryption</label>
+              <select id="wifi-encryption" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer;">
+                <option value="WPA">WPA/WPA2</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">Unsecured (No Password)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Contact (vCard) Panel -->
+          <div id="panel-vcard" style="display: none; flex-direction: column; gap: 12px;">
+            <div>
+              <label for="vcard-name" style="display: block; margin-bottom: 6px; font-size: 0.85rem;">Full Name</label>
+              <input type="text" id="vcard-name" placeholder="John Doe" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); color: var(--text-primary);">
+            </div>
+            <div>
+              <label for="vcard-phone" style="display: block; margin-bottom: 6px; font-size: 0.85rem;">Phone Number</label>
+              <input type="tel" id="vcard-phone" placeholder="+1 234 567 890" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); color: var(--text-primary);">
+            </div>
+            <div>
+              <label for="vcard-email" style="display: block; margin-bottom: 6px; font-size: 0.85rem;">Email Address</label>
+              <input type="email" id="vcard-email" placeholder="john@example.com" style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); color: var(--text-primary);">
+            </div>
+          </div>
+
+          <!-- Style customization options -->
+          <div style="border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; flex-direction: column; gap: 16px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600;">Custom Styling</h4>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <label for="color-fg" style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-secondary);">Foreground Color</label>
+                <input type="color" id="color-fg" value="#000000" style="width: 100%; height: 40px; background: none; border: 1px solid var(--border-color); border-radius: var(--radius-sm); cursor: pointer; padding: 2px;">
+              </div>
+              <div>
+                <label for="color-bg" style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-secondary);">Background Color</label>
+                <input type="color" id="color-bg" value="#ffffff" style="width: 100%; height: 40px; background: none; border: 1px solid var(--border-color); border-radius: var(--radius-sm); cursor: pointer; padding: 2px;">
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-secondary);">
+                <label for="size-input">QR Code Resolution</label>
+                <span id="size-value">256px</span>
+              </div>
+              <input type="range" id="size-input" min="128" max="512" step="64" value="256" style="width: 100%; accent-color: var(--accent);">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="qr-generator.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Universal Unit Converter Online | Unit Converter - ToolHub Pro</title>
+  <meta name="title" content="Universal Unit Converter Online | Unit Converter - ToolHub Pro">
+  <meta name="description" content="Convert measurements of Length, Mass, Area, Volume, Temperature, Speed, and Digital Data online. Free, safe, client-side.">
+  <link rel="canonical" href="https://toolhub.pro/tools/converter/unit.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Converters</span> &gt; <span>Unit Converter</span>
+        </div>
+        <h1 class="section-title">Universal Unit Converter</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Translate standard metric, imperial, and digital units instantly. Done entirely inside your browser.</p>
+      </div>
+
+      <!-- Processing Workspace -->
+      <div class="tool-workspace" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- Left Column: Source Unit -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Convert From</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">Measurement Class:</label>
+              <select id="unit-category" style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: var(--font-body);
+              ">
+                <option value="length">Length</option>
+                <option value="mass">Mass / Weight</option>
+                <option value="area">Area</option>
+                <option value="volume">Volume</option>
+                <option value="speed">Speed</option>
+                <option value="data">Digital Data</option>
+                <option value="temp">Temperature</option>
+              </select>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">From Unit:</label>
+              <select id="unit-from" style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: var(--font-body);
+              "></select>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">Source Value:</label>
+              <input type="number" id="unit-from-val" value="1" style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: monospace;
+              ">
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Target Unit -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Convert To</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 8px; opacity: 0.5; pointer-events: none;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">Measurement Class:</label>
+              <select disabled style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+              ">
+                <option>Matched Category</option>
+              </select>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">To Unit:</label>
+              <select id="unit-to" style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: var(--font-body);
+              "></select>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">Result Value:</label>
+              <input type="text" id="unit-to-val" readonly style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: monospace;
+              ">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: auto;">
+            <button class="btn btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('unit-to-val').value).then(() => window.showToast('Copied unit value!', 'success'))" style="flex: 1;">Copy Result</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="system-converters.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Convert HTML to PDF Online | HTML to PDF - ToolHub Pro</title>
+  <meta name="title" content="Convert HTML to PDF Online | HTML to PDF - ToolHub Pro">
+  <meta name="description" content="Render web pages or raw HTML code into standard PDF documents. 100% private in-browser conversion.">
+  <link rel="canonical" href="https://toolhub.pro/tools/pdf/html-to-pdf.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>PDF Tools</span> &gt; <span>HTML to PDF</span>
+        </div>
+        <h1 class="section-title">HTML to PDF Converter</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Compile and render custom HTML markup code into structured PDF pages in your browser.</p>
+      </div>
+
+      <!-- Processing Workspace (Shown Directly) -->
+      <div class="tool-workspace" id="workspace" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+        <!-- Left Column: Code Editor Box -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin: 0;">HTML Source Code</h3>
+          
+          <textarea id="html-code-input" style="
+            width: 100%;
+            height: 380px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            padding: 16px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: none;
+          " placeholder="&lt;h1&gt;Hello World&lt;/h1&gt;&#10;&lt;p&gt;Start writing raw HTML elements here to convert them into a structured PDF report.&lt;/p&gt;"></textarea>
+        </div>
+
+        <!-- Right Column: Control Options -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Compilation Options</h3>
+
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            Write or paste HTML/CSS code. The rendering engine will parse structural elements and compile them directly into pages using jsPDF.
+          </p>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+            <button class="btn btn-primary" id="html-to-pdf-btn">
+              Compile & Save PDF
+            </button>
+            <button class="btn btn-secondary" onclick="document.getElementById('html-code-input').value = ''">
+              Clear Editor
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="pdf-converters.js"></script>
+</body>
+</html>

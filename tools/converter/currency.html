@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Live Currency Converter Online | Currency Converter - ToolHub Pro</title>
+  <meta name="title" content="Live Currency Converter Online | Currency Converter - ToolHub Pro">
+  <meta name="description" content="Convert foreign currencies online with live, active exchange rates. Free, 100% private client-side calculator.">
+  <link rel="canonical" href="https://toolhub.pro/tools/converter/currency.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Converters</span> &gt; <span>Currency Converter</span>
+        </div>
+        <h1 class="section-title">Live Currency Converter</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Translate global exchange values with live, automatic API rate synchronization. Secure and private.</p>
+      </div>
+
+      <!-- Live Rate Info Banner -->
+      <div id="rate-info" style="
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 12px 18px;
+        margin-bottom: 24px;
+        font-size: 0.9rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      ">Fetching latest live rates...</div>
+
+      <!-- Processing Workspace -->
+      <div class="tool-workspace" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- Left Column: Source Currency -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Convert From</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">Source Currency:</label>
+              <select id="curr-from" style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: monospace;
+              "></select>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">Amount:</label>
+              <input type="number" id="curr-from-val" value="100" style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: monospace;
+              ">
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Target Currency -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Convert To</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">Target Currency:</label>
+              <select id="curr-to" style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: monospace;
+              "></select>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 0.9rem; color: var(--text-secondary);">Converted Amount:</label>
+              <input type="text" id="curr-to-val" readonly style="
+                background: var(--bg-tertiary);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                padding: 10px 14px;
+                font-family: monospace;
+              ">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: auto;">
+            <button class="btn btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('curr-to-val').value).then(() => window.showToast('Copied currency value!', 'success'))" style="flex: 1;">Copy Amount</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="system-converters.js"></script>
+</body>
+</html>

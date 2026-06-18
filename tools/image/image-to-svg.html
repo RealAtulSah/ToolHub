@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Image to SVG Vectorizer | Convert Raster to Vector - ToolHub Pro</title>
+  <meta name="title" content="Image to SVG Vectorizer | Convert Raster to Vector - ToolHub Pro">
+  <meta name="description" content="Trace and convert PNG, JPG, or WEBP images into scalable vector SVG markup instantly in your browser. 100% private and free.">
+  <link rel="canonical" href="https://toolhub.pro/tools/image/image-to-svg.html">
+
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+  <script>window.toolId = 'image-to-svg';</script>
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <header class="global-header" id="global-header"></header>
+
+    <main class="main-content">
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Image Tools</span> &gt; <span>Image to SVG</span>
+        </div>
+        <h1 class="section-title">Image to SVG Vectorizer</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Trace and vectorize raster images to clean SVG vector graphics locally.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"></div>
+        <h3 class="upload-title">Drag & drop your image here</h3>
+        <p class="upload-subtitle">Supports JPG, PNG, WEBP (Max 10MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+      </div>
+
+      <!-- Workspace -->
+      <div class="tool-workspace" id="workspace" style="display: none;">
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Vector Output Preview (SVG)</h3>
+          <div style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; height: 350px; overflow: hidden;">
+            <img id="preview-image" style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="SVG output preview">
+          </div>
+        </div>
+
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">SVG Code Markup</h3>
+          
+          <textarea id="svg-output" readonly style="width: 100%; height: 160px; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-sm); color: var(--text-primary); font-family: monospace; font-size: 0.8rem; resize: none;"></textarea>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <button class="btn btn-secondary" id="copy-btn">Copy SVG Code</button>
+            <button class="btn btn-primary" id="download-btn">Download SVG File</button>
+            <button class="btn btn-secondary" id="reset-btn">Convert Another Image</button>
+          </div>
+        </div>
+      </div>
+
+      <footer id="global-footer"></footer>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="converters.js"></script>
+</body>
+</html>

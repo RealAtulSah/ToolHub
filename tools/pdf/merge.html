@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Merge PDF Online | Combine PDF Files - ToolHub Pro</title>
+  <meta name="title" content="Merge PDF Online | Combine PDF Files - ToolHub Pro">
+  <meta name="description" content="Combine multiple PDF files into a single, organized document. 100% private and runs entirely in your browser.">
+  <link rel="canonical" href="https://toolhub.pro/tools/pdf/merge.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>PDF Tools</span> &gt; <span>Merge PDF</span>
+        </div>
+        <h1 class="section-title">Merge PDF</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Combine multiple PDF files in any order you choose. Completely secure and local.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+        <h3 class="upload-title">Drag & drop your PDFs here</h3>
+        <p class="upload-subtitle">Select multiple PDF files (Max 50MB per file)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="application/pdf" multiple style="display: none;">
+      </div>
+
+      <!-- Processing Workspace (Hidden Initially) -->
+      <div class="tool-workspace" id="workspace" style="display: none; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+        <!-- Left Column: Added Files List -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin: 0;">Documents to Merge</h3>
+            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('file-input').click()">+ Add More</button>
+          </div>
+          
+          <div id="merge-files-list" style="display: flex; flex-direction: column; gap: 12px; max-height: 400px; overflow-y: auto;">
+            <!-- Added files items go here -->
+          </div>
+        </div>
+
+        <!-- Right Column: Merge Control Panel -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Merge Operations</h3>
+
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            You can reorder documents using the arrow buttons before combining them into a single final PDF.
+          </p>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+            <button class="btn btn-primary" id="merge-btn">
+              Merge & Download PDF
+            </button>
+            <button class="btn btn-secondary" id="reset-btn">
+              Reset & Start Over
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="pdf-modifiers.js"></script>
+</body>
+</html>

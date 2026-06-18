@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>ToolHub Pro | All-in-One Client-Side Web Tools Suite</title>
+  <meta name="title" content="ToolHub Pro | All-in-One Client-Side Web Tools Suite">
+  <meta name="description" content="Access 120+ free, fast, and completely secure web tools for images, PDFs, and converters. All operations run 100% locally in your browser for absolute privacy.">
+  <meta name="keywords" content="pdf tools, image tools, converters, crop image, compress pdf, word to pdf, client-side, developer tools, unit converter">
+  <meta name="author" content="ToolHub Pro Team">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolhub.pro/">
+  <meta property="og:title" content="ToolHub Pro | All-in-One Client-Side Web Tools Suite">
+  <meta property="og:description" content="Access 120+ free, fast, and completely secure web tools. Absolute privacy with 100% client-side execution.">
+  <meta property="og:image" content="assets/images/og-banner.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://toolhub.pro/">
+  <meta property="twitter:title" content="ToolHub Pro | All-in-One Client-Side Web Tools Suite">
+  <meta property="twitter:description" content="Access 120+ free, fast, and completely secure web tools. Absolute privacy with 100% client-side execution.">
+  <meta property="twitter:image" content="assets/images/og-banner.jpg">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <!-- Schema Markup (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ToolHub Pro",
+      "url": "https://toolhub.pro/",
+      "description": "120+ free client-side browser tools for image processing, PDF management, and file format conversions.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires HTML5 and Javascript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Ambient Glow Backgrounds -->
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <!-- Hero Header Section -->
+      <section class="hero-section">
+        <div class="hero-badge">
+          <span></span> 100% Client-Side & Private
+        </div>
+        <h1 class="hero-title">Powerful Tools,<br>Right In Your Browser.</h1>
+        <p class="hero-subtitle">Optimize images, modify PDFs, and convert formats with instant processing. No signups, no uploads, absolute privacy.</p>
+        
+        <div class="hero-search-container">
+          <span class="search-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </span>
+          <input type="text" class="hero-search-input" placeholder="Search all 120+ tools (e.g. compress pdf, resize image)..." id="main-search-input">
+        </div>
+      </section>
+
+      <!-- Live Search Results Section -->
+      <section class="search-results-section" id="search-results-section">
+        <div class="section-header">
+          <h2 class="section-title" id="search-results-title">Search Results</h2>
+        </div>
+        <div class="tools-grid" id="search-results-grid"></div>
+      </section>
+
+      <!-- Favorites Section (Hidden if empty) -->
+      <section class="search-results-section" id="favorites-section" style="margin-bottom: 40px;">
+        <div class="section-header">
+          <h2 class="section-title">Your Favorites</h2>
+        </div>
+        <div class="tools-grid" id="favorites-grid"></div>
+      </section>
+
+      <!-- Recently Used Section (Hidden if empty) -->
+      <section class="search-results-section" id="recent-section" style="margin-bottom: 40px;">
+        <div class="section-header">
+          <h2 class="section-title">Recently Used</h2>
+        </div>
+        <div class="tools-grid" id="recent-grid"></div>
+      </section>
+
+      <!-- Categories Section -->
+      <section id="categories-section">
+        <div class="section-header">
+          <h2 class="section-title">Browse by Category</h2>
+        </div>
+        <div class="categories-grid">
+          <div class="category-card glass-panel image-cat">
+            <div class="category-header">
+              <div class="category-icon"></div>
+              <h3 class="category-title">Image Tools</h3>
+            </div>
+            <p>Crop, compress, resize, filter, and extract data from your images and photos locally.</p>
+            <div class="category-footer">
+              <span>40 Tools</span>
+              <a href="#image-tools" class="category-link">View All &rarr;</a>
+            </div>
+          </div>
+
+          <div class="category-card glass-panel pdf-cat">
+            <div class="category-header">
+              <div class="category-icon"></div>
+              <h3 class="category-title">PDF Utilities</h3>
+            </div>
+            <p>Merge, split, sign, rotate, encrypt, and compress PDF files securely inside the browser.</p>
+            <div class="category-footer">
+              <span>40 Tools</span>
+              <a href="#pdf-tools" class="category-link">View All &rarr;</a>
+            </div>
+          </div>
+
+          <div class="category-card glass-panel converter-cat">
+            <div class="category-header">
+              <div class="category-icon"></div>
+              <h3 class="category-title">Converters</h3>
+            </div>
+            <p>Convert code snippets, files, currencies, units, timestamps, and formats instantly.</p>
+            <div class="category-footer">
+              <span>40 Tools</span>
+              <a href="#converter-tools" class="category-link">View All &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Detailed Categories Lists -->
+      <section id="image-tools" style="scroll-margin-top: 90px; margin-bottom: 60px;">
+        <div class="section-header">
+          <h2 class="section-title">Image Tools</h2>
+        </div>
+        <div class="tools-grid" id="image-tools-grid"></div>
+      </section>
+
+      <section id="pdf-tools" style="scroll-margin-top: 90px; margin-bottom: 60px;">
+        <div class="section-header">
+          <h2 class="section-title">PDF Tools</h2>
+        </div>
+        <div class="tools-grid" id="pdf-tools-grid"></div>
+      </section>
+
+      <section id="converter-tools" style="scroll-margin-top: 90px; margin-bottom: 60px;">
+        <div class="section-header">
+          <h2 class="section-title">Converter Tools</h2>
+        </div>
+        <div class="tools-grid" id="converter-tools-grid"></div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="glass-panel" id="faq" style="margin-top: 80px; padding: 40px;">
+        <h2 class="section-title" style="margin-bottom: 30px;">Frequently Asked Questions</h2>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div>
+            <h4 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 8px; color: var(--accent);">Are my files secure on ToolHub Pro?</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">Absolutely. All processing occurs locally on your machine using your browser's computing engine. We do not run any backend storage or file uploads; your files never leave your device.</p>
+          </div>
+          <div style="border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 8px; color: var(--accent);">Do I need to pay or create an account?</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">No, ToolHub Pro is completely free, open-source, and does not require registration. All tools are unlocked and fully functional from day one.</p>
+          </div>
+          <div style="border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 8px; color: var(--accent);">Why is client-side processing faster?</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">Because you bypass uploading large files to a remote server and waiting for a downloaded response. Local Javascript libraries handle processing instantly, saving bandwidth and time.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification Placement -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Bootstrapping Script -->
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

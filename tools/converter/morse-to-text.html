@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Convert Morse Code to Text Online | Morse to Text - ToolHub Pro</title>
+  <meta name="title" content="Convert Morse Code to Text Online | Morse to Text - ToolHub Pro">
+  <meta name="description" content="Decode international Morse code signals back to human-readable text online. Play audible Morse sounds. 100% private in-browser.">
+  <link rel="canonical" href="https://toolhub.pro/tools/converter/morse-to-text.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Converters</span> &gt; <span>Morse to Text</span>
+        </div>
+        <h1 class="section-title">Morse Code to Text</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Convert international Morse code dots and dashes back into English alphanumeric text. Free and secure.</p>
+      </div>
+
+      <!-- Processing Workspace -->
+      <div class="tool-workspace" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- Left Column: Source Input -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Morse Code Input</h3>
+            <button class="btn btn-secondary btn-sm" id="play-morse-btn" style="padding: 4px 12px; font-size: 0.8rem;">Play Input Tone</button>
+          </div>
+          <textarea id="morse-input" style="
+            width: 100%;
+            height: 350px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            padding: 16px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: none;
+          " placeholder="Enter space-separated Morse code symbols (use '/' for word breaks)... (e.g. ... --- ... / .... . .-.. .-.. ---)"></textarea>
+          
+          <div style="display: flex; gap: 12px; margin-top: auto;">
+            <button class="btn btn-primary" id="morse-action-btn" style="flex: 1;">Translate &rarr;</button>
+            <button class="btn btn-secondary" id="clear-btn">Clear All</button>
+          </div>
+        </div>
+
+        <!-- Right Column: Text Output -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Decoded Plain Text</h3>
+          <textarea id="morse-output" readonly style="
+            width: 100%;
+            height: 350px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            padding: 16px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: none;
+          " placeholder="Translated plain text output..."></textarea>
+          
+          <div style="display: flex; gap: 12px; margin-top: auto;">
+            <button class="btn btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('morse-output').value).then(() => window.showToast('Copied to clipboard!', 'success'))" style="flex: 1;">Copy Results</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="math-converters.js"></script>
+</body>
+</html>

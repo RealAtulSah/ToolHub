@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Extract PDF Pages | Save PDF Pages Online - ToolHub Pro</title>
+  <meta name="title" content="Extract PDF Pages | Save PDF Pages Online - ToolHub Pro">
+  <meta name="description" content="Select specific pages from a PDF document and save them as a new file. 100% private in-browser tool.">
+  <link rel="canonical" href="https://toolhub.pro/tools/pdf/extract-pages.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>PDF Tools</span> &gt; <span>Extract PDF Pages</span>
+        </div>
+        <h1 class="section-title">Extract PDF Pages</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Isolate and save only the pages you want from your PDF document.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+        <h3 class="upload-title">Drag & drop your PDF here</h3>
+        <p class="upload-subtitle">Supports PDF files (Max 50MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="application/pdf" style="display: none;">
+      </div>
+
+      <!-- Processing Workspace (Hidden Initially) -->
+      <div class="tool-workspace" id="workspace" style="display: none; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+        <!-- Left Column: Document Previews -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin: 0;">Select Pages to Keep</h3>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm" id="select-all-btn">Select All</button>
+              <button class="btn btn-secondary btn-sm" id="clear-all-btn">Clear Selection</button>
+            </div>
+          </div>
+          
+          <div id="pages-preview-grid" style="max-height: 450px; overflow-y: auto;">
+            <!-- Rendered thumbnails -->
+          </div>
+          <div id="selection-stat" style="font-size: 0.85rem; color: var(--text-muted); text-align: right;"></div>
+        </div>
+
+        <!-- Right Column: Control Options -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Extraction Settings</h3>
+
+          <!-- Details -->
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+            <div><strong>File Name:</strong> <span id="filename-label" style="color: var(--text-secondary);"></span></div>
+            <div><strong>Total Pages:</strong> <span id="pages-label" style="color: var(--text-secondary);"></span></div>
+          </div>
+
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            Check the boxes of the pages you want to pull out. Click Extract to create a new PDF consisting of only those pages.
+          </p>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+            <button class="btn btn-primary" id="extract-btn">
+              Extract Selected Pages
+            </button>
+            <button class="btn btn-secondary" id="reset-btn">
+              Choose Another File
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="pdf-modifiers.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Convert Text to Hex Online | Text to Hex - ToolHub Pro</title>
+  <meta name="title" content="Convert Text to Hex Online | Text to Hex - ToolHub Pro">
+  <meta name="description" content="Convert any text string into its hexadecimal code representation online. Free, safe, and entirely client-side.">
+  <link rel="canonical" href="https://toolhub.pro/tools/converter/text-to-hex.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Converters</span> &gt; <span>Text to Hex</span>
+        </div>
+        <h1 class="section-title">Text to Hex Converter</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Translate normal plain text strings into hexadecimal representations. Fully secure.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone" style="margin-bottom: 24px;">
+        <div class="upload-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+        <h3 class="upload-title">Drag & drop your text file here</h3>
+        <p class="upload-subtitle">Supports text files (Max 10MB) or type directly in the editor below</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="text/*" style="display: none;">
+      </div>
+
+      <!-- Processing Workspace -->
+      <div class="tool-workspace" id="workspace" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- Left Column: Source Input -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Plain Text Input</h3>
+          <textarea id="data-input-preview" style="
+            width: 100%;
+            height: 350px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            padding: 16px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: none;
+          " placeholder="Enter text to convert to hex... (e.g. Hello)"></textarea>
+          
+          <div style="display: flex; gap: 12px; margin-top: auto;">
+            <button class="btn btn-primary" id="translate-btn" style="flex: 1;">Convert &rarr;</button>
+            <button class="btn btn-secondary" id="reset-btn">Clear All</button>
+          </div>
+        </div>
+
+        <!-- Right Column: Hex Output -->
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; margin: 0;">Hex Output</h3>
+          <textarea id="data-output-preview" readonly style="
+            width: 100%;
+            height: 350px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            padding: 16px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: none;
+          " placeholder="Hexadecimal bytes (space-separated)..."></textarea>
+          
+          <div style="display: flex; gap: 12px; margin-top: auto;">
+            <button class="btn btn-primary" id="save-data-btn" style="flex: 1;">Download as File</button>
+            <button class="btn btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('data-output-preview').value).then(() => window.showToast('Copied to clipboard!', 'success'))" style="flex: 1;">Copy Results</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="encoders-decoders.js"></script>
+</body>
+</html>

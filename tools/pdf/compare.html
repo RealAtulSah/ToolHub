@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags -->
+  <title>Compare PDFs Online | Compare PDF Files - ToolHub Pro</title>
+  <meta name="title" content="Compare PDFs Online | Compare PDF Files - ToolHub Pro">
+  <meta name="description" content="Side-by-side visual difference analyzer for two PDF documents. 100% private in-browser comparison.">
+  <link rel="canonical" href="https://toolhub.pro/tools/pdf/compare.html">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="global-header" id="global-header"></header>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>PDF Tools</span> &gt; <span>Compare PDFs</span>
+        </div>
+        <h1 class="section-title">Compare PDFs</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Load two separate PDF documents side-by-side to analyze visual differences and layouts. 100% private.</p>
+      </div>
+
+      <!-- Upload Zones (Double file setup) -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <!-- Upload Zone A -->
+        <div class="upload-container glass-panel" id="upload-zone" style="margin: 0; padding: 20px;">
+          <div class="upload-icon" style="font-size: 2rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+          <h3 class="upload-title" style="font-size: 1.1rem; margin: 8px 0;">Load Document A</h3>
+          <button class="btn btn-primary btn-sm">Browse PDF A</button>
+          <input type="file" id="file-input" accept="application/pdf" style="display: none;">
+        </div>
+
+        <!-- Upload Zone B -->
+        <div class="upload-container glass-panel" id="upload-zone-b" style="margin: 0; padding: 20px; display: none;">
+          <div class="upload-icon" style="font-size: 2rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div>
+          <h3 class="upload-title" style="font-size: 1.1rem; margin: 8px 0;">Load Document B</h3>
+          <button class="btn btn-primary btn-sm" onclick="document.getElementById('file-input-b').click()">Browse PDF B</button>
+          <input type="file" id="file-input-b" accept="application/pdf" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Processing Workspace (Hidden Initially) -->
+      <div class="tool-workspace" id="workspace" style="display: none; grid-template-columns: 1fr; gap: 24px;">
+        <!-- Sync Controls -->
+        <div class="glass-panel" id="compare-controls" style="display: none; align-items: center; justify-content: space-between; padding: 12px 24px;">
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button class="btn btn-secondary btn-sm" id="compare-prev-btn">&larr; Prev Page</button>
+            <span id="compare-page-stat" style="font-weight: bold; font-size: 0.95rem;">Page 1</span>
+            <button class="btn btn-secondary btn-sm" id="compare-next-btn">Next Page &rarr;</button>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="reset-btn" style="color: var(--danger);">Close Comparison</button>
+        </div>
+
+        <!-- Side by Side Canvases Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <!-- Doc A Viewport -->
+          <div class="glass-panel" style="display: flex; flex-direction: column; align-items: center; background: var(--bg-tertiary); overflow: auto; padding: 16px;">
+            <h4 style="margin: 0 0 12px 0;">Document A</h4>
+            <canvas id="compare-canvas-a" style="border: 1px solid var(--border-color); background: white; max-width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.15);"></canvas>
+          </div>
+
+          <!-- Doc B Viewport -->
+          <div class="glass-panel" style="display: flex; flex-direction: column; align-items: center; background: var(--bg-tertiary); overflow: auto; padding: 16px;">
+            <h4 style="margin: 0 0 12px 0;">Document B</h4>
+            <canvas id="compare-canvas-b" style="border: 1px solid var(--border-color); background: white; max-width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.15);"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Footer -->
+      <footer id="global-footer"></footer>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="pdf-editors.js"></script>
+</body>
+</html>

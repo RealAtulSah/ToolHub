@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>JPG to PNG Converter | Transparent PNG Creator - ToolHub Pro</title>
+  <meta name="title" content="JPG to PNG Converter | Transparent PNG Creator - ToolHub Pro">
+  <meta name="description" content="Convert JPG or JPEG images to PNG format online. Keep image quality and download instantly with local browser processing.">
+  <link rel="canonical" href="https://toolhub.pro/tools/image/jpg-to-png.html">
+
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+  <script>window.toolId = 'jpg-to-png';</script>
+</head>
+<body>
+
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="app-container">
+    <aside class="global-sidebar" id="global-sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <header class="global-header" id="global-header"></header>
+
+    <main class="main-content">
+      <div class="tool-header">
+        <div class="tool-breadcrumb">
+          <a href="../../index.html">Home</a> &gt; <span>Image Tools</span> &gt; <span>JPG to PNG Converter</span>
+        </div>
+        <h1 class="section-title">JPG to PNG Converter</h1>
+        <p style="color: var(--text-secondary); margin-top: 8px;">Convert JPG/JPEG images to PNG format. Absolute privacy, runs locally.</p>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-container glass-panel" id="upload-zone">
+        <div class="upload-icon"></div>
+        <h3 class="upload-title">Drag & drop your JPG image here</h3>
+        <p class="upload-subtitle">Supports JPG, JPEG (Max 20MB)</p>
+        <button class="btn btn-primary">Browse Files</button>
+        <input type="file" id="file-input" accept="image/jpeg,image/jpg" style="display: none;">
+      </div>
+
+      <!-- Workspace -->
+      <div class="tool-workspace" id="workspace" style="display: none;">
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Converted Preview (PNG)</h3>
+          <div style="display: flex; align-items: center; justify-content: center; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; height: 350px; overflow: hidden;">
+            <img id="preview-image" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 4px;" alt="PNG output preview">
+          </div>
+        </div>
+
+        <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600;">Conversion Info</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px; background: var(--bg-tertiary); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+              <span style="color: var(--text-secondary);">Original File Size:</span>
+              <span id="orig-size" style="font-weight: 600;">0 KB</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 4px;">
+              <span style="color: var(--text-secondary);">Converted File Size:</span>
+              <span id="target-size" style="font-weight: 600; color: var(--accent);">0 KB</span>
+            </div>
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <button class="btn btn-primary" id="download-btn">Download PNG Image</button>
+            <button class="btn btn-secondary" id="reset-btn">Convert Another Image</button>
+          </div>
+        </div>
+      </div>
+
+      <footer id="global-footer"></footer>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script type="module" src="../../assets/js/app.js"></script>
+  <script type="module" src="converters.js"></script>
+</body>
+</html>
