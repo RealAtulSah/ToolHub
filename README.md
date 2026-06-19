@@ -1,11 +1,11 @@
-# ToolHub Pro 🛠️
+# ToolHub Pro 
 ### All-in-One, Secure, Client-Side Web Tools Suite
 
 ToolHub Pro is a modern, fast, and completely secure web tools platform offering 120+ utilities for image processing, PDF management, and file format conversions. It runs **100% client-side** in the browser, ensuring your files and data never leave your device.
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 - **100% Client-Side Processing:** All operations run locally on your device using browser APIs and local JavaScript engines. Perfect privacy—zero server uploads!
 - **PWA Full Offline Support:** Fully installable as a Progressive Web App (PWA). Pre-caches all 150+ tools, scripts, stylesheets, and assets so they work 100% offline.
@@ -16,7 +16,7 @@ ToolHub Pro is a modern, fast, and completely secure web tools platform offering
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 ├── assets/
@@ -46,7 +46,7 @@ ToolHub Pro is a modern, fast, and completely secure web tools platform offering
 
 ---
 
-## 🚀 Running Locally
+## Running Locally
 
 Because the project uses ES6 Javascript Modules (`type="module"`), opening the files directly in a browser via the file protocol (`file:///...`) will trigger browser CORS restrictions. You must run a local HTTP server:
 
@@ -66,7 +66,7 @@ Then open `http://localhost:8000` in your browser.
 
 ---
 
-## 🔒 Security & Privacy
+## Security & Privacy
 
 ToolHub Pro does not collect, log, or transmit any user files or text inputs. Everything is compiled and processed locally in your browser memory:
 - **No Analytics Tracking:** We don't track your tools usage.
@@ -75,5 +75,5 @@ ToolHub Pro does not collect, log, or transmit any user files or text inputs. Ev
 
 ---
 
-## 📄 License
+## License
 This project is open-source. Feel free to use, modify, and self-host!

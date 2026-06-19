@@ -1,4 +1,4 @@
-const CACHE_NAME = 'toolhub-pro-v3';
+const CACHE_NAME = 'toolhub-pro-v4';
 const ASSETS_TO_CACHE = [
   './',
   './assets/css/responsive.css',
