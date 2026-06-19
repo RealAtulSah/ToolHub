@@ -30,7 +30,7 @@ const FooterComponent = {
           <a href="${rootPath}disclaimer.html">Disclaimer</a>
           <a href="${rootPath}index.html#faq">FAQ</a>
         </div>
-        <div>&copy; ${currentYear} ToolHub Pro. All rights reserved.</div>
+        <div>&copy; ${currentYear} ToolHub Pro. developed by <a href="https://realatulsah.github.io/site/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none; font-weight: 500;">Atul Sah</a> All rights reserved.</div>
       </div>
     `;
   }
