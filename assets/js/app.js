@@ -22,6 +22,10 @@ function getRootPath() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // PWA setup
+  injectPwaLinks();
+  registerServiceWorker();
+
   // 1. Initialize core engines
   ThemeEngine.init();
   
@@ -441,4 +445,47 @@ window.showPreviewModal = function(blob, filename) {
   };
   document.addEventListener('keydown', escHandler);
 };
+
+function injectPwaLinks() {
+  const rootPath = getRootPath();
+  
+  // 1. Favicon (standard)
+  let faviconLink = document.querySelector('link[rel="icon"]');
+  if (!faviconLink) {
+    faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    document.head.appendChild(faviconLink);
+  }
+  faviconLink.href = `${rootPath}assets/images/favicon.ico`;
+  faviconLink.type = 'image/x-icon';
+
+  // 2. Apple touch icon
+  let appleTouchLink = document.querySelector('link[rel="apple-touch-icon"]');
+  if (!appleTouchLink) {
+    appleTouchLink = document.createElement('link');
+    appleTouchLink.rel = 'apple-touch-icon';
+    document.head.appendChild(appleTouchLink);
+  }
+  appleTouchLink.href = `${rootPath}assets/images/icon-192.png`;
+
+  // 3. Web manifest
+  let manifestLink = document.querySelector('link[rel="manifest"]');
+  if (!manifestLink) {
+    manifestLink = document.createElement('link');
+    manifestLink.rel = 'manifest';
+    document.head.appendChild(manifestLink);
+  }
+  manifestLink.href = `${rootPath}manifest.json`;
+}
+
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      const rootPath = getRootPath();
+      navigator.serviceWorker.register(`${rootPath}sw.js`)
+        .then(reg => console.log('ServiceWorker registered:', reg.scope))
+        .catch(err => console.error('ServiceWorker registration failed:', err));
+    });
+  }
+}
 

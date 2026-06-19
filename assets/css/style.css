@@ -877,39 +877,70 @@ aside.global-sidebar {
   gap: 6px;
   transition: var(--transition);
 }
-.tools-dropdown-trigger:hover, .tools-dropdown-container.open .tools-dropdown-trigger {
+.tools-dropdown-trigger:hover, 
+.tools-dropdown-container:hover .tools-dropdown-trigger,
+.tools-dropdown-container.open .tools-dropdown-trigger {
   color: var(--accent);
   background: var(--bg-tertiary);
 }
 .dropdown-chevron {
   transition: transform 0.2s;
 }
+.tools-dropdown-container:hover .dropdown-chevron,
 .tools-dropdown-container.open .dropdown-chevron {
   transform: rotate(180deg);
 }
+
+/* Category dropdown menu (mega-menu style) */
 .tools-dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-  width: 240px;
+  width: 580px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
-  padding: 12px;
+  padding: 16px;
   z-index: 1000;
   display: none;
+  backdrop-filter: blur(10px);
 }
+
+/* Open states on hover and click fallback */
+.tools-dropdown-container:hover .tools-dropdown-menu,
 .tools-dropdown-container.open .tools-dropdown-menu {
   display: block;
 }
+
+/* Specific position adjustments for header dropdowns */
+#global-header .tools-dropdown-container:nth-child(2) .tools-dropdown-menu {
+  /* Center PDF tools dropdown */
+  left: -150px;
+}
+#global-header .tools-dropdown-container:nth-child(3) .tools-dropdown-menu {
+  /* Align Converter tools to the right */
+  right: 0;
+  left: auto;
+}
+#fav-dropdown-container .tools-dropdown-menu {
+  /* Favorites dropdown is smaller and single column */
+  width: 280px;
+  right: 0;
+  left: auto;
+}
+
 .dropdown-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 12px;
+}
+#fav-dropdown-container .dropdown-list {
+  grid-template-columns: 1fr;
   max-height: 350px;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 }
+
 .dropdown-list li a {
   display: block;
   padding: 6px 10px;
@@ -926,7 +957,83 @@ aside.global-sidebar {
   background: var(--bg-tertiary);
 }
 
-/* Custom scrollbar for dropdown lists */
+/* Mobile Nav Drawer Styles */
+.mobile-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(2, 6, 23, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.mobile-drawer-overlay.open {
+  display: block;
+  opacity: 1;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  z-index: 10000;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+.mobile-nav-drawer.open {
+  transform: translateX(-300px);
+}
+
+.drawer-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawer-details summary::-webkit-details-marker {
+  display: none;
+}
+.drawer-details summary {
+  list-style: none;
+}
+.drawer-details summary::after {
+  content: '+';
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.drawer-details[open] summary::after {
+  content: '-';
+  transform: rotate(90deg);
+}
+
+.drawer-details ul li a {
+  display: block;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+.drawer-details ul li a:hover {
+  color: var(--accent);
+  background: var(--bg-tertiary);
+}
+
+/* Custom scrollbar for dropdown lists & drawer */
 .scrollbar-custom::-webkit-scrollbar {
   width: 4px;
 }
@@ -1032,4 +1139,10 @@ aside.global-sidebar {
   padding: 40px;
   color: var(--text-secondary);
 }
+
+/* Light theme logo color inversion for high readability */
+[data-theme="light"] .logo-image {
+  filter: invert(0.9) hue-rotate(180deg) brightness(0.8);
+}
+
 

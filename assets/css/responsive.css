@@ -121,65 +121,51 @@
 
 @media (max-width: 768px) {
   header.global-header {
-    height: auto !important;
-    min-height: var(--header-height);
-    padding: 12px 20px !important;
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
+    height: var(--header-height);
+    padding: 0 20px !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center !important;
+    gap: 0 !important;
   }
   
   .header-left {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    width: 100%;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0 !important;
+    width: auto !important;
   }
 
   .header-logo {
-    width: 100%;
-    justify-content: space-between;
+    width: auto !important;
   }
 
   .tools-nav-menu {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-    width: 100%;
-    justify-content: space-between;
+    display: none !important; /* Hide desktop menu on mobile */
   }
 
-  .tools-dropdown-container {
-    flex: 1;
-    min-width: calc(33.33% - 8px);
-  }
-
-  .tools-dropdown-trigger {
-    width: 100%;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    padding: 8px;
-    border: 1px solid var(--border-color);
-    background: var(--bg-tertiary);
-  }
-
-  .tools-dropdown-menu {
-    position: fixed;
-    top: auto;
-    left: 10px;
-    right: 10px;
-    width: auto !important;
-    max-height: 300px;
-    overflow-y: auto;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    z-index: 1001;
+  .header-search {
+    display: none !important; /* Hide desktop search */
   }
 
   .header-actions {
-    display: none !important; /* Hide redundant theme toggle from mobile header main layout if we keep it compact, or let it flex */
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+
+  .tool-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
   }
 
   .preview-modal {
@@ -190,8 +176,20 @@
 }
 
 @media (max-width: 480px) {
-  .tools-dropdown-container {
-    min-width: 100%;
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .upload-container {
+    padding: 40px 20px;
   }
 }
 
