@@ -38,8 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     SearchEngine.init(window.allTools);
 
     // 3. Render layout components
-    HeaderComponent.render();
-    SidebarComponent.render(window.allTools);
+    HeaderComponent.render(window.allTools);
     FooterComponent.render();
 
     // 4. Render index lists (if on the home page)
@@ -122,6 +121,7 @@ function createToolCardHtml(tool, rootPath) {
  * Attaches real-time click and interactions to grids
  */
 function attachCardListeners() {
+  const rootPath = getRootPath();
   document.querySelectorAll('.tool-card').forEach(card => {
     const toolId = card.getAttribute('data-id');
     
@@ -141,13 +141,16 @@ function attachCardListeners() {
       });
     }
 
-    // Card click (excluding favorite button clicks) to add to recently used
-    const link = card.querySelector('.tool-card-link');
-    if (link) {
-      link.addEventListener('click', () => {
+    // Whole card click (excluding favorite button clicks)
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.favorite-btn')) return;
+      
+      const tool = window.allTools.find(t => t.id === toolId);
+      if (tool) {
         StorageEngine.addRecentlyUsed(toolId);
-      });
-    }
+        window.location.href = `${rootPath}${tool.path}`;
+      }
+    });
   });
 }
 
@@ -309,3 +312,133 @@ function showToast(message, type = 'info') {
     }, 300);
   }, 3500);
 }
+
+window.showPreviewModal = function(blob, filename) {
+  // Remove existing modal if any
+  const existing = document.getElementById('preview-modal-container');
+  if (existing) existing.remove();
+
+  // Create elements
+  const overlay = document.createElement('div');
+  overlay.id = 'preview-modal-container';
+  overlay.className = 'preview-modal-overlay';
+
+  const modal = document.createElement('div');
+  modal.className = 'preview-modal';
+
+  // Header
+  const header = document.createElement('div');
+  header.className = 'preview-modal-header';
+  header.innerHTML = `
+    <h3 class="preview-modal-title">Preview: ${filename}</h3>
+    <button class="preview-modal-close" id="pm-close-btn">&times;</button>
+  `;
+  modal.appendChild(header);
+
+  // Body
+  const body = document.createElement('div');
+  body.className = 'preview-modal-body';
+  modal.appendChild(body);
+
+  // Footer
+  const footer = document.createElement('div');
+  footer.className = 'preview-modal-footer';
+  footer.innerHTML = `
+    <button class="btn btn-secondary" id="pm-cancel-btn">Close</button>
+    <button class="btn btn-primary" id="pm-download-btn">Download File</button>
+  `;
+  modal.appendChild(footer);
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  const url = URL.createObjectURL(blob);
+
+  // Handle render based on type
+  const type = blob.type;
+  if (type === 'application/pdf') {
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = 'none';
+    iframe.style.borderRadius = 'var(--radius-md)';
+    body.appendChild(iframe);
+  } else if (type.startsWith('image/')) {
+    const img = document.createElement('img');
+    img.src = url;
+    img.style.maxWidth = '100%';
+    img.style.maxHeight = '100%';
+    img.style.objectFit = 'contain';
+    img.style.borderRadius = 'var(--radius-md)';
+    body.appendChild(img);
+  } else if (type === 'text/plain' || type === 'application/json' || type === 'text/csv' || type === 'text/xml' || type.startsWith('text/') || type.startsWith('application/javascript') || type.startsWith('application/xml')) {
+    const pre = document.createElement('pre');
+    pre.style.width = '100%';
+    pre.style.height = '100%';
+    pre.style.margin = '0';
+    pre.style.padding = '16px';
+    pre.style.background = 'var(--bg-secondary)';
+    pre.style.border = '1px solid var(--border-color)';
+    pre.style.borderRadius = 'var(--radius-md)';
+    pre.style.overflow = 'auto';
+    pre.style.fontFamily = 'var(--font-mono)';
+    pre.style.fontSize = '0.9rem';
+    pre.style.color = 'var(--text-primary)';
+    pre.style.whiteSpace = 'pre-wrap';
+    pre.style.wordBreak = 'break-all';
+    pre.style.textAlign = 'left';
+
+    blob.text().then(text => {
+      pre.textContent = text;
+    });
+    body.appendChild(pre);
+  } else {
+    // Unsupported or general binary (like ZIP, Excel, Word)
+    const info = document.createElement('div');
+    info.className = 'preview-modal-info';
+    info.innerHTML = `
+      <p style="font-size: 1.1rem; margin-bottom: 8px;">Preview is not supported for this file format.</p>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Please click Download below to save your file.</p>
+    `;
+    body.appendChild(info);
+  }
+
+  // Show transition
+  setTimeout(() => {
+    overlay.classList.add('active');
+  }, 10);
+
+  // Event handlers
+  const cleanup = () => {
+    overlay.classList.remove('active');
+    setTimeout(() => {
+      overlay.remove();
+      URL.revokeObjectURL(url);
+    }, 200);
+  };
+
+  overlay.querySelector('#pm-close-btn').onclick = cleanup;
+  overlay.querySelector('#pm-cancel-btn').onclick = cleanup;
+  overlay.querySelector('#pm-download-btn').onclick = () => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    cleanup();
+  };
+
+  // Close on Escape or clicking outside
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) cleanup();
+  });
+  const escHandler = (e) => {
+    if (e.key === 'Escape') {
+      cleanup();
+      document.removeEventListener('keydown', escHandler);
+    }
+  };
+  document.addEventListener('keydown', escHandler);
+};
+

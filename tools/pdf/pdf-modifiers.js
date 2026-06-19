@@ -206,13 +206,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Helper to trigger standard download of bytes
   function downloadBytes(bytes, name) {
     const blob = new Blob([bytes], { type: 'application/pdf' });
-    const url = PdfHelper.createObjectUrl(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = name;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (window.showPreviewModal) {
+      window.showPreviewModal(blob, name);
+    } else {
+      const url = PdfHelper.createObjectUrl(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   }
 
   // Reset tool views
@@ -292,13 +296,17 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
 
           const zipBlob = await zip.generateAsync({ type: 'blob' });
-          const zipUrl = PdfHelper.createObjectUrl(zipBlob);
-          const link = document.createElement('a');
-          link.href = zipUrl;
-          link.download = `${pdfData.file.name}_split_pages.zip`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          if (window.showPreviewModal) {
+            window.showPreviewModal(zipBlob, `${pdfData.file.name}_split_pages.zip`);
+          } else {
+            const zipUrl = PdfHelper.createObjectUrl(zipBlob);
+            const link = document.createElement('a');
+            link.href = zipUrl;
+            link.download = `${pdfData.file.name}_split_pages.zip`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
           window.showToast('Split pages packed in ZIP!', 'success');
         } else {
           // Split by range indices

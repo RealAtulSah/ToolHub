@@ -94,13 +94,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function downloadBlob(blob, filename) {
-    const url = PdfHelper.createObjectUrl(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (window.showPreviewModal) {
+      window.showPreviewModal(blob, filename);
+    } else {
+      const url = PdfHelper.createObjectUrl(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   }
 
   function resetWorkspace() {

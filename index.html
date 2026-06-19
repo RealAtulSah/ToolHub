@@ -69,23 +69,15 @@
     <!-- Main Content Panel -->
     <main class="main-content">
       
-      <!-- Hero Header Section -->
-      <section class="hero-section">
-        <div class="hero-badge">
-          <span></span> 100% Client-Side & Private
-        </div>
-        <h1 class="hero-title">Powerful Tools,<br>Right In Your Browser.</h1>
-        <p class="hero-subtitle">Optimize images, modify PDFs, and convert formats with instant processing. No signups, no uploads, absolute privacy.</p>
-        
-        <div class="hero-search-container">
-          <span class="search-icon">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </span>
-          <input type="text" class="hero-search-input" placeholder="Search all 120+ tools (e.g. compress pdf, resize image)..." id="main-search-input">
-        </div>
-      </section>
+      <!-- Minimal Search Bar -->
+      <div class="glass-panel" style="margin-bottom: 30px; display: flex; align-items: center; gap: 12px; padding: 12px 20px;">
+        <span class="search-icon" style="color: var(--text-muted); display: flex; align-items: center;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </span>
+        <input type="text" id="main-search-input" placeholder="Search all 120+ tools (e.g. compress pdf, resize image)..." style="flex: 1; background: transparent; border: none; outline: none; color: var(--text-primary); font-size: 1rem; font-family: var(--font-heading);">
+      </div>
 
       <!-- Live Search Results Section -->
       <section class="search-results-section" id="search-results-section">

@@ -139,13 +139,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function downloadBlob(blob, name) {
-    const url = PdfHelper.createObjectUrl(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = name;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (window.showPreviewModal) {
+      window.showPreviewModal(blob, name);
+    } else {
+      const url = PdfHelper.createObjectUrl(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   }
 
   function resetWorkspace() {

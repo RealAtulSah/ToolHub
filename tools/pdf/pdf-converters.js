@@ -219,13 +219,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // File Download triggers
   function downloadBlob(blob, filename) {
-    const url = PdfHelper.createObjectUrl(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (window.showPreviewModal) {
+      window.showPreviewModal(blob, filename);
+    } else {
+      const url = PdfHelper.createObjectUrl(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+
+  function savePdfDoc(doc, filename) {
+    const blob = doc.output('blob');
+    if (window.showPreviewModal) {
+      window.showPreviewModal(blob, filename);
+    } else {
+      doc.save(filename);
+    }
   }
 
   function resetWorkspace() {
@@ -309,8 +322,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           doc.addImage(imgUrl, 'JPEG', 0, 0, 210, 297);
         }
 
-        doc.save('images_converted.pdf');
-        window.showToast('PDF downloaded successfully!', 'success');
+        savePdfDoc(doc, 'images_converted.pdf');
+        window.showToast('PDF generated successfully!', 'success');
       } catch (err) {
         console.error(err);
         window.showToast('Failed to compile PDF.', 'danger');
@@ -379,8 +392,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           y += 8;
         });
 
-        doc.save(`${pdfData.file.name.replace('.docx', '')}_converted.pdf`);
-        window.showToast('PDF downloaded!', 'success');
+        savePdfDoc(doc, `${pdfData.file.name.replace('.docx', '')}_converted.pdf`);
+        window.showToast('PDF generated!', 'success');
       } catch (err) {
         console.error(err);
         window.showToast('Word compilation failed.', 'danger');
@@ -447,8 +460,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           y += 8;
         });
 
-        doc.save('html_converted.pdf');
-        window.showToast('PDF downloaded!', 'success');
+        savePdfDoc(doc, 'html_converted.pdf');
+        window.showToast('PDF generated!', 'success');
       } catch (err) {
         console.error(err);
         window.showToast('Compilation failed.', 'danger');
@@ -524,8 +537,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           y += 8;
         });
 
-        doc.save(`${pdfData.file.name.replace(/\.[^/.]+$/, '')}_converted.pdf`);
-        window.showToast('PDF saved!', 'success');
+        savePdfDoc(doc, `${pdfData.file.name.replace(/\.[^/.]+$/, '')}_converted.pdf`);
+        window.showToast('PDF generated!', 'success');
       } catch (err) {
         console.error(err);
         window.showToast('Excel conversion failed.', 'danger');
@@ -556,8 +569,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           y += 8;
         });
 
-        doc.save(`${pdfData.file.name.replace('.csv', '')}_converted.pdf`);
-        window.showToast('CSV converted successfully!', 'success');
+        savePdfDoc(doc, `${pdfData.file.name.replace('.csv', '')}_converted.pdf`);
+        window.showToast('PDF generated!', 'success');
       } catch (err) {
         console.error(err);
         window.showToast('CSV compilation failed.', 'danger');
@@ -590,7 +603,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           y += 6;
         });
 
-        doc.save('json_converted.pdf');
+        savePdfDoc(doc, 'json_converted.pdf');
         window.showToast('PDF compiled successfully!', 'success');
       } catch (err) {
         console.error(err);
