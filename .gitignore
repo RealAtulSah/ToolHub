@@ -24,3 +24,7 @@ ehthumbs.db
 .env.*.local
 dist/
 build/
+
+# Test files
+test*
+

@@ -42,11 +42,10 @@ async function handleFileSelect(file) {
     return;
   }
 
-  originalFile = file;
-
   try {
     window.showToast('Loading file...', 'info');
     resetWorkspaceData();
+    originalFile = file;
 
     if (toolId === 'image-to-base64') {
       await processImageToBase64(file);

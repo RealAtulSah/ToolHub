@@ -37,11 +37,10 @@ async function handleFileSelect(file) {
     return;
   }
 
-  originalFile = file;
-
   try {
     window.showToast('Loading image...', 'info');
     resetWorkspaceData();
+    originalFile = file;
 
     const loaded = await ImageHelper.loadImage(file);
     originalImage = loaded.img;

@@ -52,13 +52,12 @@ async function handleFileSelect(file) {
     return;
   }
 
-  originalFile = file;
-
   try {
     window.showToast('Loading image...', 'info');
     
     // Clean up previous runs
     resetWorkspaceData();
+    originalFile = file;
 
     // Load file
     const loaded = await ImageHelper.loadImage(file);

@@ -208,7 +208,7 @@ const PdfHelper = {
     while (!doc) {
       try {
         const loadingTask = window.pdfjsLib.getDocument({
-          data: new Uint8Array(arrayBuffer),
+          data: new Uint8Array(arrayBuffer.slice(0)),
           password: pwd
         });
         doc = await loadingTask.promise;
