@@ -106,6 +106,7 @@ const HeaderComponent = {
         </span>
         <input type="text" placeholder="Search tools... (Press '/' to focus)" aria-label="Search tools" id="nav-search-input">
         <span class="search-kbd">/</span>
+        <div class="header-search-results scrollbar-custom" id="header-search-results"></div>
       </div>
 
       <div class="header-actions">
@@ -133,6 +134,7 @@ const HeaderComponent = {
           <!-- Search in mobile drawer -->
           <div class="drawer-search" style="position:relative; width:100%;">
             <input type="text" placeholder="Search tools..." id="drawer-search-input" style="width:100%; background:var(--bg-tertiary); border:1px solid var(--border-color); padding:10px 16px; border-radius:var(--radius-md); color:var(--text-primary);">
+            <div class="header-search-results scrollbar-custom" id="drawer-search-results"></div>
           </div>
           
           <!-- Drawer Favorites -->
@@ -213,13 +215,130 @@ const HeaderComponent = {
       }
     });
 
-    // Search Input listeners (Delegated to search.js or app.js)
-    const searchInput = document.getElementById('nav-search-input');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        window.dispatchEvent(new CustomEvent('globalSearch', { detail: { query: e.target.value } }));
+    // Floating search dropdown logic and binding helper
+    const mainSearchInput = document.getElementById('main-search-input');
+    
+    const bindSearchInput = (searchInputEl, searchResultsEl) => {
+      if (!searchInputEl || !searchResultsEl) return;
+
+      searchInputEl.addEventListener('input', (e) => {
+        const query = e.target.value;
+
+        // Dispatch globalSearch event so other elements on homepage can react
+        window.dispatchEvent(new CustomEvent('globalSearch', { detail: { query } }));
+
+        // If on home page, hide the floating dropdown and let home page search handle it
+        if (mainSearchInput) {
+          searchResultsEl.classList.remove('active');
+          searchResultsEl.innerHTML = '';
+          return;
+        }
+
+        if (!query || query.trim() === '') {
+          searchResultsEl.classList.remove('active');
+          searchResultsEl.innerHTML = '';
+          return;
+        }
+
+        // Search through the tools
+        let matched = [];
+        if (window.SearchEngine && typeof window.SearchEngine.search === 'function') {
+          matched = window.SearchEngine.search(query);
+        } else {
+          // Fallback search in case engine is loading
+          const q = query.toLowerCase().trim();
+          matched = tools.filter(t => 
+            t.name.toLowerCase().includes(q) || 
+            t.category.toLowerCase().includes(q) || 
+            t.description.toLowerCase().includes(q) ||
+            (t.keywords && t.keywords.some(kw => kw.toLowerCase().includes(q)))
+          );
+        }
+
+        if (matched.length === 0) {
+          searchResultsEl.innerHTML = `
+            <div style="padding: 16px; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+              No matching tools found
+            </div>
+          `;
+        } else {
+          const topMatches = matched.slice(0, 8);
+          searchResultsEl.innerHTML = topMatches.map((tool, idx) => `
+            <div class="header-search-item" data-path="${rootPath}${tool.path}" data-id="${tool.id}" data-index="${idx}">
+              <div class="header-search-item-title">
+                <span>${tool.name}</span>
+                <span class="header-search-item-category">${tool.category}</span>
+              </div>
+              <div class="header-search-item-desc">${tool.description}</div>
+            </div>
+          `).join('');
+
+          // Bind clicks to search items
+          searchResultsEl.querySelectorAll('.header-search-item').forEach(item => {
+            item.addEventListener('click', () => {
+              const path = item.getAttribute('data-path');
+              const toolId = item.getAttribute('data-id');
+              if (window.StorageEngine) {
+                window.StorageEngine.addRecentlyUsed(toolId);
+              }
+              window.location.href = path;
+            });
+          });
+        }
+        searchResultsEl.classList.add('active');
       });
-    }
+
+      // Keyboard navigation support inside search dropdown
+      searchInputEl.addEventListener('keydown', (e) => {
+        if (!searchResultsEl.classList.contains('active')) return;
+
+        const items = searchResultsEl.querySelectorAll('.header-search-item');
+        if (items.length === 0) return;
+
+        let activeIndex = Array.from(items).findIndex(item => item.classList.contains('focused'));
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (activeIndex !== -1) items[activeIndex].classList.remove('focused');
+          activeIndex = (activeIndex + 1) % items.length;
+          items[activeIndex].classList.add('focused');
+          items[activeIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (activeIndex !== -1) items[activeIndex].classList.remove('focused');
+          activeIndex = (activeIndex - 1 + items.length) % items.length;
+          items[activeIndex].classList.add('focused');
+          items[activeIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter') {
+          if (activeIndex !== -1) {
+            e.preventDefault();
+            items[activeIndex].click();
+          }
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          searchResultsEl.classList.remove('active');
+          searchInputEl.blur();
+        }
+      });
+    };
+
+    const searchInput = document.getElementById('nav-search-input');
+    const searchResults = document.getElementById('header-search-results');
+    const drawerSearch = document.getElementById('drawer-search-input');
+    const drawerSearchResults = document.getElementById('drawer-search-results');
+
+    bindSearchInput(searchInput, searchResults);
+    bindSearchInput(drawerSearch, drawerSearchResults);
+
+    // Close search dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (searchResults && !e.target.closest('.header-search')) {
+        searchResults.classList.remove('active');
+      }
+      if (drawerSearchResults && !e.target.closest('.drawer-search')) {
+        drawerSearchResults.classList.remove('active');
+      }
+    });
 
     // Mobile Navigation Drawer Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -256,14 +375,6 @@ const HeaderComponent = {
 
     if (drawerOverlay) {
       drawerOverlay.onclick = closeDrawer;
-    }
-
-    // Drawer Search Input listener
-    const drawerSearch = document.getElementById('drawer-search-input');
-    if (drawerSearch) {
-      drawerSearch.addEventListener('input', (e) => {
-        window.dispatchEvent(new CustomEvent('globalSearch', { detail: { query: e.target.value } }));
-      });
     }
 
     // Dynamic favorites updates

@@ -100,17 +100,9 @@ function createToolCardHtml(tool, rootPath) {
 
   return `
     <div class="tool-card glass-panel" data-id="${tool.id}">
-      <div class="tool-card-header">
-        <div class="tool-card-icon">
-          <!-- Stand-in icon text (SVG mapping will follow in tools phase) -->
-          <span style="font-size: 1.15rem; font-weight: bold;">
-            ${tool.name.charAt(0)}
-          </span>
-        </div>
-        <button class="favorite-btn ${isFav ? 'active' : ''}" aria-label="Toggle Favorite">
-          ${isFav ? '★' : '☆'}
-        </button>
-      </div>
+      <button class="favorite-btn ${isFav ? 'active' : ''}" aria-label="Toggle Favorite">
+        ${isFav ? '★' : '☆'}
+      </button>
       <h3 class="tool-card-title">${tool.name}</h3>
       <p class="tool-card-desc">${tool.description}</p>
       <div class="tool-card-footer">
