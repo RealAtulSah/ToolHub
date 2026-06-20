@@ -4,6 +4,7 @@
  */
 import ImageHelper from '../../assets/js/image-helper.js';
 import PdfHelper from '../../assets/js/pdf-helper.js';
+import Security from '../../assets/js/security.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   // DOM Elements
@@ -272,7 +273,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
           <head><meta charset="utf-8"></head>
           <body>
-            ${extractedText.split('\n').map(line => `<p>${line}</p>`).join('')}
+            ${extractedText.split('\n').map(line => `<p>${Security.escapeHtml(line)}</p>`).join('')}
           </body>
           </html>
         `;

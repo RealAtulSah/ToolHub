@@ -38,7 +38,10 @@ const StorageEngine = {
 
   // --- FAVORITES ENGINE ---
   getFavorites() {
-    return this.get(this.keys.favorites, []);
+    const data = this.get(this.keys.favorites, []);
+    // Validate: must be an array of safe string IDs
+    if (!Array.isArray(data)) return [];
+    return data.filter(id => typeof id === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(id));
   },
 
   isFavorite(toolId) {
@@ -47,6 +50,9 @@ const StorageEngine = {
   },
 
   toggleFavorite(toolId) {
+    // Validate toolId format before storing
+    if (typeof toolId !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(toolId)) return false;
+
     let favorites = this.getFavorites();
     const index = favorites.indexOf(toolId);
     let added = false;
@@ -70,10 +76,16 @@ const StorageEngine = {
 
   // --- RECENTLY USED ENGINE ---
   getRecentlyUsed() {
-    return this.get(this.keys.recentlyUsed, []);
+    const data = this.get(this.keys.recentlyUsed, []);
+    // Validate: must be an array of safe string IDs
+    if (!Array.isArray(data)) return [];
+    return data.filter(id => typeof id === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(id));
   },
 
   addRecentlyUsed(toolId) {
+    // Validate toolId format before storing
+    if (typeof toolId !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(toolId)) return;
+
     let recentlyUsed = this.getRecentlyUsed();
     
     // Remove if already exists so we can move it to the top

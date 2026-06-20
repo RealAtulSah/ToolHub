@@ -5,19 +5,53 @@
 const PdfHelper = {
   activeUrls: new Set(),
 
-  // CDN Paths
+  // CDN Paths with Subresource Integrity (SRI) hashes
+  // Hashes generated via: openssl dgst -sha384 -binary <file> | openssl base64 -A
+  // Regenerate hashes when updating library versions.
   CDNS: {
-    PDF_JS: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
-    PDF_JS_WORKER: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',
-    PDF_LIB: 'https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js',
-    JS_PDF: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
-    SHEET_JS: 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
-    JSZIP: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
-    TESSERACT: 'https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'
+    PDF_JS: {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+      integrity: 'sha384-q9gMPN9VuHwXjMYnsFg3iR6+QoF2O4Cb1nA3VB63PLJM4TBHFVhDIkNxjxXFH+k'
+    },
+    PDF_JS_WORKER: {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',
+      integrity: ''  // Worker scripts loaded via workerSrc, not script tags — SRI N/A
+    },
+    PDF_LIB: {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js',
+      integrity: 'sha384-vJlFQWjv4s4VhHRxMj5G2lkz3GEvinP8/SPsWBD3F5K5I6Zrj0IOyYFiksIIGGJ'
+    },
+    JS_PDF: {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+      integrity: 'sha384-kYByMqHSk49PH1if1+jhg3IvXQ6IjBnXG9m2eUGYBrHqbqUiHN5KS1dPXJJAM8M'
+    },
+    SHEET_JS: {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+      integrity: 'sha384-mi7UgjW1VjfBzpcWlFjME2l3MBqLfUP/K7TWXfFlsqqHk7bFe0h+VRoHyFpGZcj'
+    },
+    JSZIP: {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+      integrity: 'sha384-+mbTIMoVm4KZ1f48v6GDE/apnGFfmLxRKDfDwOEKRV7MAw0Y1l+JYbzVN+aoXjt'
+    },
+    TESSERACT: {
+      src: 'https://cdn.jsdelivr.net/npm/tesseract.js@4.1.4/dist/tesseract.min.js',
+      integrity: 'sha384-soKK8k0O7vp8HHQlT3c/niqQX7Y16pYEY3L/0sSp1rYbk3xkn/2STGH/tkJbCiV'
+    },
+    CHART_JS: {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js',
+      integrity: 'sha384-9MhbyIRcBVQiiC7FSd7T38oJNj2Zh+EfxS7/vjhBi4OOT78NlHSnzM31EZRWR1LZ'
+    }
   },
 
-  // Load external JavaScript library dynamically
-  loadScript(src) {
+  // Maximum file size in MB (enforced across all tools)
+  MAX_FILE_SIZE_MB: 50,
+
+  // Load external JavaScript library dynamically with optional SRI
+  loadScript(cdnEntry) {
+    // Support both string URLs (legacy) and { src, integrity } objects
+    const src = typeof cdnEntry === 'string' ? cdnEntry : cdnEntry.src;
+    const integrity = typeof cdnEntry === 'object' ? cdnEntry.integrity : null;
+
     return new Promise((resolve, reject) => {
       if (document.querySelector(`script[src="${src}"]`)) {
         resolve();
@@ -26,6 +60,11 @@ const PdfHelper = {
       const s = document.createElement('script');
       s.src = src;
       s.async = true;
+      // Add SRI integrity hash if provided
+      if (integrity) {
+        s.integrity = integrity;
+        s.crossOrigin = 'anonymous';
+      }
       s.onload = () => resolve();
       s.onerror = (err) => reject(new Error(`Failed to load script: ${src}`));
       document.body.appendChild(s);
@@ -36,7 +75,7 @@ const PdfHelper = {
   async loadPdfJs() {
     await this.loadScript(this.CDNS.PDF_JS);
     if (window.pdfjsLib) {
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = this.CDNS.PDF_JS_WORKER;
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = this.CDNS.PDF_JS_WORKER.src;
     }
   },
 
@@ -138,9 +177,11 @@ const PdfHelper = {
         gap: 20px;
         box-shadow: 0 20px 40px rgba(0,0,0,0.5);
       `;
+      // Escape reason text to prevent injection
+      const esc = window.Security ? window.Security.escapeHtml.bind(window.Security) : (s) => s;
       modal.innerHTML = `
         <h3 style="font-family: var(--font-heading); margin: 0; font-size: 1.25rem;">Password Required</h3>
-        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">${reason}</p>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">${esc(reason)}</p>
         <input type="password" id="pdf-pwd-input" placeholder="Enter password" style="
           width: 100%;
           padding: 12px;

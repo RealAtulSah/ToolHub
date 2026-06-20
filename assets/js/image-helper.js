@@ -5,8 +5,12 @@
 const ImageHelper = {
   activeUrls: new Set(),
 
-  // Load external JavaScript library dynamically
-  loadScript(src) {
+  // Load external JavaScript library dynamically (with optional SRI)
+  loadScript(cdnEntry) {
+    // Support both string URLs (legacy) and { src, integrity } objects
+    const src = typeof cdnEntry === 'string' ? cdnEntry : cdnEntry.src;
+    const integrity = typeof cdnEntry === 'object' ? cdnEntry.integrity : null;
+
     return new Promise((resolve, reject) => {
       if (document.querySelector(`script[src="${src}"]`)) {
         resolve();
@@ -15,14 +19,23 @@ const ImageHelper = {
       const s = document.createElement('script');
       s.src = src;
       s.async = true;
+      // Add SRI integrity hash if provided
+      if (integrity) {
+        s.integrity = integrity;
+        s.crossOrigin = 'anonymous';
+      }
       s.onload = () => resolve();
       s.onerror = (err) => reject(new Error(`Failed to load script: ${src}`));
       document.body.appendChild(s);
     });
   },
 
-  // Load external CSS stylesheet dynamically
-  loadStyle(href) {
+  // Load external CSS stylesheet dynamically (with optional SRI)
+  loadStyle(cdnEntry) {
+    // Support both string URLs (legacy) and { href, integrity } objects
+    const href = typeof cdnEntry === 'string' ? cdnEntry : cdnEntry.href;
+    const integrity = typeof cdnEntry === 'object' ? cdnEntry.integrity : null;
+
     return new Promise((resolve) => {
       if (document.querySelector(`link[href="${href}"]`)) {
         resolve();
@@ -31,6 +44,10 @@ const ImageHelper = {
       const l = document.createElement('link');
       l.rel = 'stylesheet';
       l.href = href;
+      if (integrity) {
+        l.integrity = integrity;
+        l.crossOrigin = 'anonymous';
+      }
       l.onload = () => resolve();
       document.head.appendChild(l);
     });

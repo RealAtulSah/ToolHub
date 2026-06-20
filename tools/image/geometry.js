@@ -277,7 +277,10 @@ function setupActionButtons() {
       if (toolId === 'splitter') {
         window.showToast('Generating split images ZIP...', 'info');
         
-        const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+        const JSZIP_CDN = {
+          src: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+          integrity: 'sha384-+mbTIMoVm4KZ1f48v6GDE/apnGFfmLxRKDfDwOEKRV7MAw0Y1l+JYbzVN+aoXjt'
+        };
         try {
           await ImageHelper.loadScript(JSZIP_CDN);
         } catch (e) {

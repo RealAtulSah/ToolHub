@@ -116,11 +116,12 @@ const SidebarComponent = {
       return;
     }
 
+    const esc = window.Security ? window.Security.escapeHtml.bind(window.Security) : (s) => s;
     favListEl.innerHTML = favTools.map(t => `
       <li class="nav-item">
-        <a href="${rootPath}${t.path}" style="padding: 6px 12px; font-size: 0.85rem;">
+        <a href="${rootPath}${esc(t.path)}" style="padding: 6px 12px; font-size: 0.85rem;">
           <span style="color: hsl(350, 89%, 60%); font-size: 1rem;">★</span>
-          ${t.name}
+          ${esc(t.name)}
         </a>
       </li>
     `).join('');
@@ -141,11 +142,12 @@ const SidebarComponent = {
       return;
     }
 
+    const esc = window.Security ? window.Security.escapeHtml.bind(window.Security) : (s) => s;
     recentListEl.innerHTML = recentTools.map(t => `
       <li class="nav-item">
-        <a href="${rootPath}${t.path}" style="padding: 6px 12px; font-size: 0.85rem;">
+        <a href="${rootPath}${esc(t.path)}" style="padding: 6px 12px; font-size: 0.85rem;">
           <span style="color: var(--accent); font-size: 1rem;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; display: inline-block; vertical-align: middle;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
-          ${t.name}
+          ${esc(t.name)}
         </a>
       </li>
     `).join('');
