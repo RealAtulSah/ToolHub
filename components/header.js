@@ -24,17 +24,16 @@ const HeaderComponent = {
     const pdfTools = tools.filter(t => t.category === 'pdf');
     const converterTools = tools.filter(t => t.category === 'converter');
 
-    // Build lists HTML — escape all tool data for XSS protection
-    const esc = window.Security ? window.Security.escapeHtml.bind(window.Security) : (s) => s;
-    const imageToolsHtml = imageTools.map(t => `<li><a href="${rootPath}${esc(t.path)}">${esc(t.name)}</a></li>`).join('');
-    const pdfToolsHtml = pdfTools.map(t => `<li><a href="${rootPath}${esc(t.path)}">${esc(t.name)}</a></li>`).join('');
-    const converterToolsHtml = converterTools.map(t => `<li><a href="${rootPath}${esc(t.path)}">${esc(t.name)}</a></li>`).join('');
+    // Build lists HTML
+    const imageToolsHtml = imageTools.map(t => `<li><a href="${rootPath}${t.path}">${t.name}</a></li>`).join('');
+    const pdfToolsHtml = pdfTools.map(t => `<li><a href="${rootPath}${t.path}">${t.name}</a></li>`).join('');
+    const converterToolsHtml = converterTools.map(t => `<li><a href="${rootPath}${t.path}">${t.name}</a></li>`).join('');
 
     // Fetch favorites
     const favIds = window.StorageEngine ? window.StorageEngine.getFavorites() : [];
     const favTools = tools.filter(t => favIds.includes(t.id));
     const favToolsHtml = favTools.length > 0
-      ? favTools.map(t => `<li><a href="${rootPath}${esc(t.path)}">★ ${esc(t.name)}</a></li>`).join('')
+      ? favTools.map(t => `<li><a href="${rootPath}${t.path}">★ ${t.name}</a></li>`).join('')
       : '<li style="padding: 12px; font-size: 0.8rem; color: var(--text-muted); text-align: center;">No favorites added yet.</li>';
 
     headerEl.className = 'global-header glass-panel';
@@ -264,14 +263,13 @@ const HeaderComponent = {
           `;
         } else {
           const topMatches = matched.slice(0, 8);
-          const esc = window.Security ? window.Security.escapeHtml.bind(window.Security) : (s) => s;
           searchResultsEl.innerHTML = topMatches.map((tool, idx) => `
-            <div class="header-search-item" data-path="${rootPath}${esc(tool.path)}" data-id="${esc(tool.id)}" data-index="${idx}">
+            <div class="header-search-item" data-path="${rootPath}${tool.path}" data-id="${tool.id}" data-index="${idx}">
               <div class="header-search-item-title">
-                <span>${esc(tool.name)}</span>
-                <span class="header-search-item-category">${esc(tool.category)}</span>
+                <span>${tool.name}</span>
+                <span class="header-search-item-category">${tool.category}</span>
               </div>
-              <div class="header-search-item-desc">${esc(tool.description)}</div>
+              <div class="header-search-item-desc">${tool.description}</div>
             </div>
           `).join('');
 
@@ -392,9 +390,8 @@ const HeaderComponent = {
     const favIds = window.StorageEngine ? window.StorageEngine.getFavorites() : [];
     const favTools = tools.filter(t => favIds.includes(t.id));
     
-    const esc = window.Security ? window.Security.escapeHtml.bind(window.Security) : (s) => s;
     const html = favTools.length > 0
-      ? favTools.map(t => `<li><a href="${rootPath}${esc(t.path)}">★ ${esc(t.name)}</a></li>`).join('')
+      ? favTools.map(t => `<li><a href="${rootPath}${t.path}">★ ${t.name}</a></li>`).join('')
       : '<li style="padding: 12px; font-size: 0.8rem; color: var(--text-muted); text-align: center;">No favorites added yet.</li>';
       
     if (listEl) listEl.innerHTML = html;

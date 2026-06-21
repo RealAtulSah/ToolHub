@@ -5,7 +5,6 @@
 import ThemeEngine from './theme.js';
 import StorageEngine from './storage.js';
 import SearchEngine from './search.js';
-import Security from './security.js';
 import HeaderComponent from '../../components/header.js';
 import SidebarComponent from '../../components/sidebar.js';
 import FooterComponent from '../../components/footer.js';
@@ -23,10 +22,6 @@ function getRootPath() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // Security hardening
-  Security.preventFraming();
-  Security.showConsoleWarning();
-
   // PWA setup
   injectPwaLinks();
   registerServiceWorker();
@@ -102,21 +97,17 @@ function createToolCardHtml(tool, rootPath) {
   const badgeClass = tool.popular ? 'popular' : tool.trending ? 'trending' : '';
   const badgeText = tool.popular ? 'Popular' : tool.trending ? 'Trending' : '';
   const badgeHtml = badgeText ? `<span class="tool-badge ${badgeClass}">${badgeText}</span>` : '';
-  const safeName = Security.escapeHtml(tool.name);
-  const safeDesc = Security.escapeHtml(tool.description);
-  const safeId = Security.escapeHtml(tool.id);
-  const safePath = Security.escapeHtml(tool.path);
 
   return `
-    <div class="tool-card glass-panel" data-id="${safeId}">
+    <div class="tool-card glass-panel" data-id="${tool.id}">
       <button class="favorite-btn ${isFav ? 'active' : ''}" aria-label="Toggle Favorite">
         ${isFav ? '★' : '☆'}
       </button>
-      <h3 class="tool-card-title">${safeName}</h3>
-      <p class="tool-card-desc">${safeDesc}</p>
+      <h3 class="tool-card-title">${tool.name}</h3>
+      <p class="tool-card-desc">${tool.description}</p>
       <div class="tool-card-footer">
         ${badgeHtml}
-        <a href="${rootPath}${safePath}" class="tool-card-link">Open Tool &rarr;</a>
+        <a href="${rootPath}${tool.path}" class="tool-card-link">Open Tool &rarr;</a>
       </div>
     </div>
   `;
@@ -296,13 +287,15 @@ function showToast(message, type = 'info') {
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
   
-  const iconSpan = document.createElement('span');
-  const msgDiv = document.createElement('div');
-  // Use textContent to prevent XSS — message is never rendered as HTML
-  msgDiv.textContent = message;
+  let icon = '';
+  if (type === 'success') icon = '';
+  if (type === 'warning') icon = '';
+  if (type === 'danger') icon = '';
 
-  toast.appendChild(iconSpan);
-  toast.appendChild(msgDiv);
+  toast.innerHTML = `
+    <span>${icon}</span>
+    <div>${message}</div>
+  `;
 
   container.appendChild(toast);
 
@@ -332,10 +325,8 @@ window.showPreviewModal = function(blob, filename) {
   // Header
   const header = document.createElement('div');
   header.className = 'preview-modal-header';
-  // Escape filename to prevent XSS from maliciously-named files
-  const safeFilename = Security.escapeHtml(filename);
   header.innerHTML = `
-    <h3 class="preview-modal-title">Preview: ${safeFilename}</h3>
+    <h3 class="preview-modal-title">Preview: ${filename}</h3>
     <button class="preview-modal-close" id="pm-close-btn">&times;</button>
   `;
   modal.appendChild(header);

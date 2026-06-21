@@ -724,7 +724,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   async function initSizeAnalyzerWorkspace() {
     try {
       window.showToast('Parsing object sizes...', 'info');
-      await PdfHelper.loadScript(PdfHelper.CDNS.CHART_JS);
+      await PdfHelper.loadScript('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js');
 
       const binaryStr = new TextDecoder().decode(pdfData.arrayBuffer);
       const imgCount = (binaryStr.match(/\/Subtype\s*\/Image/g) || []).length;

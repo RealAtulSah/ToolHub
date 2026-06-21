@@ -28,10 +28,7 @@ let originalUrl = null;
 let ocrWorker = null;
 
 // CDN Path
-const TESSERACT_JS = {
-  src: 'https://cdn.jsdelivr.net/npm/tesseract.js@4.1.4/dist/tesseract.min.js',
-  integrity: 'sha384-+56qagDlzJ3YYkDcyAXRdhrP7/+ai8qJcS6HpjACl2idDoCyCqRf5VVi7E/XkGae'
-};
+const TESSERACT_JS = 'https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js';
 
 // Bind drag & drop upload
 ImageHelper.setupDragAndDrop('upload-zone', 'file-input', handleFileSelect);

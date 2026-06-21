@@ -3,7 +3,6 @@
  * Handles Color Picking, EXIF Viewer, QR Code Reading, and Metadata stripping.
  */
 import ImageHelper from '../../assets/js/image-helper.js';
-import Security from '../../assets/js/security.js';
 
 // DOM Elements
 const uploadZone = document.getElementById('upload-zone');
@@ -159,12 +158,9 @@ function renderMagnifier(ctx, px, py, r, g, b) {
  * EXIF Viewer Tool
  */
 async function runExifViewer() {
-  const EXIF_CDN = {
-    src: 'https://cdn.jsdelivr.net/npm/exif-js@2.3.0/exif.min.js',
-    integrity: 'sha384-XA6MLxWM/a7WM3ORLJzVQ3CqLGIbj/kC7kKS1bkr0v/MHXW6WtJ9hXVcLPPVJSr'
-  };
+  const EXIF_JS = 'https://cdn.jsdelivr.net/npm/exif-js';
   try {
-    await ImageHelper.loadScript(EXIF_CDN);
+    await ImageHelper.loadScript(EXIF_JS);
   } catch (e) {
     window.showToast('Failed to load EXIF library.', 'danger');
     return;
@@ -189,13 +185,10 @@ async function runExifViewer() {
         const val = allTags[tag];
         // format arrays or objects nicely
         const displayVal = typeof val === 'object' ? JSON.stringify(val) : val;
-        // Escape both tag name and value to prevent XSS from crafted EXIF fields
-        const safeTag = Security.escapeHtml(tag);
-        const safeVal = Security.escapeHtml(displayVal);
         return `
           <tr>
-            <td style="padding: 10px; font-weight: 500; border-bottom: 1px solid var(--border-color);">${safeTag}</td>
-            <td style="padding: 10px; color: var(--text-secondary); word-break: break-all; border-bottom: 1px solid var(--border-color);">${safeVal}</td>
+            <td style="padding: 10px; font-weight: 500; border-bottom: 1px solid var(--border-color);">${tag}</td>
+            <td style="padding: 10px; color: var(--text-secondary); word-break: break-all; border-bottom: 1px solid var(--border-color);">${displayVal}</td>
           </tr>
         `;
       }).join('');
@@ -208,12 +201,9 @@ async function runExifViewer() {
  * QR Code Reader Tool
  */
 async function runQrReader() {
-  const JSQR_CDN = {
-    src: 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js',
-    integrity: 'sha384-gjkSbDPJ0A0/Vou0e0PRYDgf0a4rGeQyb5CXHP0LsfP5IN30VZ1c7zxnOm4fKzJ'
-  };
+  const JSQR_JS = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js';
   try {
-    await ImageHelper.loadScript(JSQR_CDN);
+    await ImageHelper.loadScript(JSQR_JS);
   } catch (e) {
     window.showToast('Failed to load QR scanning library.', 'danger');
     return;

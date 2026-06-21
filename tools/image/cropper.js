@@ -31,14 +31,8 @@ let scaleX = 1;
 let scaleY = 1;
 
 // CDN Paths
-const CROPPER_JS = {
-  src: 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js',
-  integrity: 'sha384-r+ljwOAhwY4/kdyzMnuBg7MEVoWpTMp5EYUDntB/E9qzNwL9dAEcNrb2XaV+mJc2'
-};
-const CROPPER_CSS = {
-  href: 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css',
-  integrity: 'sha384-oMy41mb/qJnpJlpXOF57hSu2KGi47l/UV9+tPNrBOs7/ap5Vubj/3phrCtjutHMQ'
-};
+const CROPPER_JS = 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js';
+const CROPPER_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css';
 
 // Bind upload events
 ImageHelper.setupDragAndDrop('upload-zone', 'file-input', handleFileSelect);

@@ -39,10 +39,7 @@ const sizeValue = document.getElementById('size-value');
 let qrcodeInstance = null;
 let currentTab = 'text'; // 'text' | 'wifi' | 'vcard'
 
-const QRCODE_JS = {
-  src: 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js',
-  integrity: 'sha384-3zSEDfvllQohrq0PHL1fOXJuC/jSOO34H46t6UQfobFOmxE5BpjjaIJY5F2/bMnU'
-};
+const QRCODE_JS = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
 
 // Load libraries on startup
 initGenerator();

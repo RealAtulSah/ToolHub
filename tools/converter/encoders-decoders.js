@@ -260,13 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
     html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
                .replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
-    // Links — block dangerous URI schemes (javascript:, data:, vbscript:)
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
-      if (/^\s*(javascript|data|vbscript)\s*:/i.test(url)) {
-        return text; // Strip link, keep text only
-      }
-      return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`;
-    });
+    // Links
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
 
     // Lists
     html = html.replace(/^\s*-\s+(.*?)$/gm, '<li>$1</li>');
