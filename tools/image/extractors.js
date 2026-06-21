@@ -37,6 +37,11 @@ async function handleFileSelect(file) {
     return;
   }
 
+  if (file.size === 0) {
+    window.showToast('Selected file is empty.', 'warning');
+    return;
+  }
+
   try {
     window.showToast('Loading image...', 'info');
     resetWorkspaceData();

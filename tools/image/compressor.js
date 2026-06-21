@@ -37,6 +37,11 @@ async function handleFileSelect(file) {
     return;
   }
 
+  if (file.size === 0) {
+    window.showToast('Selected file is empty.', 'warning');
+    return;
+  }
+
   // Cap size at 20MB
   if (file.size > 20 * 1024 * 1024) {
     window.showToast('Image file exceeds 20MB limit.', 'warning');
