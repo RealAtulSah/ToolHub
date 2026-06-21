@@ -19,7 +19,7 @@ let originalUrl = null;
 let resultUrl = null;
 let resultBlob = null;
 
-const toolId = window.toolId || window.location.pathname.split('/').pop().replace('.html', '');
+const toolId = window.toolId;
 
 init();
 

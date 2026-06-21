@@ -23,7 +23,7 @@ let compositeBlob = null;
 let uploadedFiles = [];
 let uploadedImages = [];
 
-const toolId = window.toolId || window.location.pathname.split('/').pop().replace('.html', '');
+const toolId = window.toolId;
 
 init();
 

@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 3. Render layout components
     HeaderComponent.render(window.allTools);
-    SidebarComponent.render(window.allTools);
     FooterComponent.render();
 
     // 4. Render index lists (if on the home page)
@@ -481,20 +480,6 @@ function injectPwaLinks() {
 }
 
 function registerServiceWorker() {
-  // Disable service worker on localhost to prevent local testing cache issues
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(registrations => {
-        for (let registration of registrations) {
-          registration.unregister().then(success => {
-            if (success) console.log('Successfully unregistered service worker on localhost');
-          });
-        }
-      });
-    }
-    return;
-  }
-
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       const rootPath = getRootPath();

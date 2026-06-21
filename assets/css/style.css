@@ -889,17 +889,15 @@ footer.global-footer {
   margin-bottom: 20px;
 }
 
-/* --- HIDE SIDEBAR ON DESKTOP --- */
-@media (min-width: 993px) {
-  aside.global-sidebar {
-    display: none !important;
-  }
-  .sidebar-overlay {
-    display: none !important;
-  }
-  .menu-toggle-btn {
-    display: none !important;
-  }
+/* --- HIDE SIDEBAR --- */
+aside.global-sidebar {
+  display: none !important;
+}
+.sidebar-overlay {
+  display: none !important;
+}
+.menu-toggle-btn {
+  display: none !important;
 }
 
 /* --- HEADER NAVIGATION & DROPDOWNS --- */

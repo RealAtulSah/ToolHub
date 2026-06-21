@@ -19,7 +19,7 @@ let convertedUrl = null;
 let convertedBlob = null;
 
 // Determine Tool Mode
-const toolId = window.toolId || window.location.pathname.split('/').pop().replace('.html', '');
+const toolId = window.toolId;
 
 // Initialize
 init();
@@ -287,7 +287,7 @@ async function convertToFavicon() {
 
   const JSZIP_CDN = {
     src: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
-    integrity: 'sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG'
+    integrity: 'sha384-+mbTIMoVm4KZ1f48v6GDE/apnGFfmLxRKDfDwOEKRV7MAw0Y1l+JYbzVN+aoXjt'
   };
   try {
     await ImageHelper.loadScript(JSZIP_CDN);

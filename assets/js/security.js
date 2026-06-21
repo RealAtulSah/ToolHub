@@ -59,11 +59,10 @@ const Security = {
     return true;
   },
 
+  /**
+   * Frame-busting: Prevents the page from being embedded in an iframe.
+   */
   preventFraming() {
-    // Allow framing during local development/testing to prevent breaking the IDE browser preview
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || !window.location.hostname) {
-      return;
-    }
     if (window.self !== window.top) {
       try {
         window.top.location = window.self.location;
