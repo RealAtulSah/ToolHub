@@ -20,7 +20,7 @@ let originalUrl = null;
 let strippedBlob = null;
 let strippedUrl = null;
 
-const toolId = window.toolId;
+const toolId = window.toolId || window.location.pathname.split('/').pop().replace('.html', '');
 
 init();
 
@@ -161,7 +161,7 @@ function renderMagnifier(ctx, px, py, r, g, b) {
 async function runExifViewer() {
   const EXIF_CDN = {
     src: 'https://cdn.jsdelivr.net/npm/exif-js@2.3.0/exif.min.js',
-    integrity: 'sha384-XA6MLxWM/a7WM3ORLJzVQ3CqLGIbj/kC7kKS1bkr0v/MHXW6WtJ9hXVcLPPVJSr'
+    integrity: 'sha384-bBk9n8KsCuctQitaFzFx/GKOiW55lMJJazrZck6VGKtlwuiMcRSEldT8D10SsVT2'
   };
   try {
     await ImageHelper.loadScript(EXIF_CDN);
@@ -210,7 +210,7 @@ async function runExifViewer() {
 async function runQrReader() {
   const JSQR_CDN = {
     src: 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js',
-    integrity: 'sha384-gjkSbDPJ0A0/Vou0e0PRYDgf0a4rGeQyb5CXHP0LsfP5IN30VZ1c7zxnOm4fKzJ'
+    integrity: 'sha384-9Q0jWoineiIq95JeIyBsNV90KKLfDsbkj29k/YFxf76a2JwkHDYkMuSbNGN6XJfV'
   };
   try {
     await ImageHelper.loadScript(JSQR_CDN);
@@ -255,6 +255,43 @@ async function runQrReader() {
 async function runRemoveMetadata() {
   window.showToast('Stripping file headers...', 'info');
 
+  const EXIF_CDN = {
+    src: 'https://cdn.jsdelivr.net/npm/exif-js@2.3.0/exif.min.js',
+    integrity: 'sha384-bBk9n8KsCuctQitaFzFx/GKOiW55lMJJazrZck6VGKtlwuiMcRSEldT8D10SsVT2'
+  };
+  try {
+    await ImageHelper.loadScript(EXIF_CDN);
+  } catch (e) {
+    console.error('Failed to load EXIF library for comparison', e);
+  }
+
+  // 1. Read EXIF tags from originalFile before stripping
+  if (window.EXIF) {
+    window.EXIF.getData(originalFile, function() {
+      const beforeTags = window.EXIF.getAllTags(this);
+      const beforeTable = document.getElementById('metadata-before-table');
+      if (beforeTable) {
+        if (!beforeTags || Object.keys(beforeTags).length === 0) {
+          beforeTable.innerHTML = `<tr><td colspan="2" style="padding: 12px; text-align: center; color: var(--text-muted);">No EXIF metadata found in this image.</td></tr>`;
+        } else {
+          beforeTable.innerHTML = Object.keys(beforeTags)
+            .map(tag => {
+              const val = beforeTags[tag];
+              const displayVal = typeof val === 'object' ? JSON.stringify(val) : val;
+              const safeTag = Security.escapeHtml(tag);
+              const safeVal = Security.escapeHtml(displayVal);
+              return `
+                <tr>
+                  <td style="padding: 8px; font-weight: 500; border-bottom: 1px solid var(--border-color);">${safeTag}</td>
+                  <td style="padding: 8px; color: var(--text-secondary); word-break: break-all; border-bottom: 1px solid var(--border-color);">${safeVal}</td>
+                </tr>
+              `;
+            }).join('');
+        }
+      }
+    });
+  }
+
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = originalImage.naturalWidth;
@@ -272,6 +309,33 @@ async function runRemoveMetadata() {
       // Update sizes
       document.getElementById('orig-size').innerText = ImageHelper.formatSize(originalFile.size);
       document.getElementById('cleared-size').innerText = ImageHelper.formatSize(blob.size);
+
+      // 2. Read EXIF tags from strippedBlob to confirm removal
+      if (window.EXIF) {
+        window.EXIF.getData(blob, function() {
+          const afterTags = window.EXIF.getAllTags(this);
+          const afterTable = document.getElementById('metadata-after-table');
+          if (afterTable) {
+            if (!afterTags || Object.keys(afterTags).length === 0) {
+              afterTable.innerHTML = `<tr><td colspan="2" style="padding: 12px; text-align: center; color: var(--success); font-weight: 600;">✅ Clean! No metadata tags remaining.</td></tr>`;
+            } else {
+              afterTable.innerHTML = Object.keys(afterTags)
+                .map(tag => {
+                  const val = afterTags[tag];
+                  const displayVal = typeof val === 'object' ? JSON.stringify(val) : val;
+                  const safeTag = Security.escapeHtml(tag);
+                  const safeVal = Security.escapeHtml(displayVal);
+                  return `
+                    <tr>
+                      <td style="padding: 8px; font-weight: 500; border-bottom: 1px solid var(--border-color);">${safeTag}</td>
+                      <td style="padding: 8px; color: var(--text-secondary); word-break: break-all; border-bottom: 1px solid var(--border-color);">${safeVal}</td>
+                    </tr>
+                  `;
+                }).join('');
+            }
+          }
+        });
+      }
 
       ImageHelper.cleanCanvas(canvas);
       window.showToast('Metadata tags stripped!', 'success');
@@ -349,4 +413,11 @@ function resetWorkspaceData() {
   
   const canvas = document.getElementById('picker-canvas');
   if (canvas) ImageHelper.cleanCanvas(canvas);
+
+  if (toolId === 'remove-metadata') {
+    const beforeTable = document.getElementById('metadata-before-table');
+    const afterTable = document.getElementById('metadata-after-table');
+    if (beforeTable) beforeTable.innerHTML = `<tr><td colspan="2" style="padding: 12px; text-align: center; color: var(--text-muted);">Reading EXIF tags...</td></tr>`;
+    if (afterTable) afterTable.innerHTML = `<tr><td colspan="2" style="padding: 12px; text-align: center; color: var(--text-muted);">Waiting for metadata removal...</td></tr>`;
+  }
 }

@@ -30,7 +30,7 @@ let ocrWorker = null;
 // CDN Path
 const TESSERACT_JS = {
   src: 'https://cdn.jsdelivr.net/npm/tesseract.js@4.1.4/dist/tesseract.min.js',
-  integrity: 'sha384-soKK8k0O7vp8HHQlT3c/niqQX7Y16pYEY3L/0sSp1rYbk3xkn/2STGH/tkJbCiV'
+  integrity: 'sha384-+56qagDlzJ3YYkDcyAXRdhrP7/+ai8qJcS6HpjACl2idDoCyCqRf5VVi7E/XkGae'
 };
 
 // Bind drag & drop upload

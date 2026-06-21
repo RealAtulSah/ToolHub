@@ -11,7 +11,7 @@ const PdfHelper = {
   CDNS: {
     PDF_JS: {
       src: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
-      integrity: 'sha384-q9gMPN9VuHwXjMYnsFg3iR6+QoF2O4Cb1nA3VB63PLJM4TBHFVhDIkNxjxXFH+k'
+      integrity: 'sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e'
     },
     PDF_JS_WORKER: {
       src: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',
@@ -19,23 +19,23 @@ const PdfHelper = {
     },
     PDF_LIB: {
       src: 'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js',
-      integrity: 'sha384-vJlFQWjv4s4VhHRxMj5G2lkz3GEvinP8/SPsWBD3F5K5I6Zrj0IOyYFiksIIGGJ'
+      integrity: 'sha384-weMABwrltA6jWR8DDe9Jp5blk+tZQh7ugpCsF3JwSA53WZM9/14PjS5LAJNHNjAI'
     },
     JS_PDF: {
       src: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
-      integrity: 'sha384-kYByMqHSk49PH1if1+jhg3IvXQ6IjBnXG9m2eUGYBrHqbqUiHN5KS1dPXJJAM8M'
+      integrity: 'sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk'
     },
     SHEET_JS: {
       src: 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
-      integrity: 'sha384-mi7UgjW1VjfBzpcWlFjME2l3MBqLfUP/K7TWXfFlsqqHk7bFe0h+VRoHyFpGZcj'
+      integrity: 'sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw'
     },
     JSZIP: {
       src: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
-      integrity: 'sha384-+mbTIMoVm4KZ1f48v6GDE/apnGFfmLxRKDfDwOEKRV7MAw0Y1l+JYbzVN+aoXjt'
+      integrity: 'sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG'
     },
     TESSERACT: {
       src: 'https://cdn.jsdelivr.net/npm/tesseract.js@4.1.4/dist/tesseract.min.js',
-      integrity: 'sha384-soKK8k0O7vp8HHQlT3c/niqQX7Y16pYEY3L/0sSp1rYbk3xkn/2STGH/tkJbCiV'
+      integrity: 'sha384-+56qagDlzJ3YYkDcyAXRdhrP7/+ai8qJcS6HpjACl2idDoCyCqRf5VVi7E/XkGae'
     },
     CHART_JS: {
       src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js',
