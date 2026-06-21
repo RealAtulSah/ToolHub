@@ -19,7 +19,7 @@ let convertedUrl = null;
 let convertedBlob = null;
 
 // Determine Tool Mode
-const toolId = window.toolId;
+const toolId = window.toolId || window.location.pathname.split('/').pop().replace('.html', '');
 
 // Initialize
 init();

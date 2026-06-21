@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 3. Render layout components
     HeaderComponent.render(window.allTools);
+    SidebarComponent.render(window.allTools);
     FooterComponent.render();
 
     // 4. Render index lists (if on the home page)
